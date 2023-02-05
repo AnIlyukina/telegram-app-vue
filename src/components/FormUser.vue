@@ -25,16 +25,40 @@
 </template>
 
 <script>
-import { defineComponent, watchEffect, computed, ref } from 'vue'
+import { defineComponent, watchEffect, ref, onMounted,onUnmounted } from 'vue'
 import { useTelegram } from '@/hooks/useTelegram.js'
 
 export default defineComponent({
   name: 'FormUser',
   setup() {
     const { tg } = useTelegram()
-    tg.mainButton.setParams({
-      text: 'Отправить данные'
+    
+    let city = ref('')
+    let street = ref('')
+    let subject = ref('physical')
+    onMounted(()=> {
+      console.log('mounted')
+      tg.mainButton.setParams({
+        text: 'Отправить данные'
+      })
+      // eslint-disable-next-line no-undef
+      tg.onEvent('mainButtonClicked', onSendData)
     })
+
+    onUnmounted(() => {
+      // eslint-disable-next-line no-undef
+      tg.offEvent('mainButtonClicked', onSendData)
+    })
+
+    // eslint-disable-next-line no-undef
+    const onSendData = () => {
+      const data = {
+        city: city.value,
+        street: street.value,
+        subject: subject.value
+      }
+      tg.sendData(JSON.stringify(data))
+    } 
 
 
     watchEffect(() => {
@@ -46,10 +70,6 @@ export default defineComponent({
     }, {  
       flush: 'post'
     });
-
-    let city = ref('')
-    let street = ref('')
-    let subject = ref('')
 
     return {
       city,
