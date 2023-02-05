@@ -42,23 +42,28 @@ export default defineComponent({
         text: 'Отправить данные'
       })
       // eslint-disable-next-line no-undef
-      tg.onEvent('mainButtonClicked', onSendData)
-    })
-
-    onUnmounted(() => {
-      // eslint-disable-next-line no-undef
-      tg.offEvent('mainButtonClicked', onSendData)
-    })
-
-    // eslint-disable-next-line no-undef
-    const onSendData = () => {
+      tg.onEvent('mainButtonClicked', () => {
       const data = {
         city: city.value,
         street: street.value,
         subject: subject.value
       }
       tg.sendData(JSON.stringify(data))
-    } 
+      })
+    })
+
+    onUnmounted(() => {
+      // eslint-disable-next-line no-undef
+      tg.offEvent('mainButtonClicked', () => {
+        const data = {
+        city: city.value,
+        street: street.value,
+        subject: subject.value
+      }
+      tg.sendData(JSON.stringify(data))
+      })
+    })
+
 
 
     watchEffect(() => {
