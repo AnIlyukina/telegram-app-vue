@@ -36,11 +36,12 @@ export default defineComponent({
     let city = ref('')
     let street = ref('')
     let subject = ref('physical')
+    tg.onEvent('mainButtonClicked', onSendData)
     onMounted(()=> {
       console.log('mounted')
-      tg.mainButton.setParams({
-        text: 'Отправить данные'
-      })
+      // tg.mainButton.setParams({
+      //   text: 'Отправить данные'
+      // })
       // eslint-disable-next-line no-undef
       tg.onEvent('mainButtonClicked', onSendData)
     })
