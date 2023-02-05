@@ -1,8 +1,6 @@
 <template>
   <div class="app">
     <nav-bar/>
-    <router-link to="/">ProductList</router-link> |
-    <router-link to="/form">Form</router-link>
     <router-view />
   </div>
 </template>
