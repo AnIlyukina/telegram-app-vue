@@ -8,23 +8,17 @@
 <script>
 import { defineComponent } from 'vue';
 import NavBar from '@/components/NavBar.vue'
-
+import { useTelegram } from '@/hooks/useTelegram.js'
 export default defineComponent({
   name: 'App',
   components: {
     NavBar
   },
   setup() {
-    const tg = window.Telegram.WebApp
+    const {tg, onToggleButton}  = useTelegram()
     // приложение проинициализировалось
     tg.ready()
-    const onToggleButton = () => {
-      if (tg.MainButton.isVisible) {
-        tg.MainButton.hide()
-      } else {
-        tg.MainButton.show()
-      }
-    }
+   
     return {
       onToggleButton
     }

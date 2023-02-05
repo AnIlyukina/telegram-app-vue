@@ -11,20 +11,17 @@
 <script>
 import { defineComponent } from 'vue';
 import TgButton from './TgButton.vue';
-
+import { useTelegram } from '@/hooks/useTelegram.js'
 export default defineComponent({
   name: "NavBar",
   components: { TgButton },
  setup() {
-    const tg = window.Telegram.WebApp
+    const {tg , username, onClose} = useTelegram()
     // приложение проинициализировалось
     tg.ready()
 
-
-    const username = tg.initDataUnsafe?.user?.username
-    const onClose = () => {
-      tg.close()
-    }
+  
+    
     return {
       onClose,
       username
