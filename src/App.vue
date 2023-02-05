@@ -1,40 +1,39 @@
 <template>
-  <div class="main-page">
-    <button
-      class="close-button"
-      @click="close"
-      >
-      Закрыть
-    </button>
-
+  <div class="app">
+    <nav-bar/>
+    <button @click="onToggleButton">toggle</button>
   </div>
 </template>
 
 <script>
 import { defineComponent } from 'vue';
+import NavBar from '@/components/NavBar.vue'
 
 export default defineComponent({
   name: 'App',
+  components: {
+    NavBar
+  },
   setup() {
     const tg = window.Telegram.WebApp
     // приложение проинициализировалось
     tg.ready()
-
-    console.log(tg, 'tg')
-    const close = () => {
-      console.log('close')
-      tg.close()
+    const onToggleButton = () => {
+      if (tg.MainButton.isVisible) {
+        tg.MainButton.hide()
+      } else {
+        tg.MainButton.show()
+      }
     }
     return {
-      close
+      onToggleButton
     }
-
   }
 });
 </script>
 
 <style>
-#app {
+.app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
