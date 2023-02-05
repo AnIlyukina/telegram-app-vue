@@ -1,7 +1,9 @@
 <template>
   <div class="app">
     <nav-bar/>
-    <button @click="onToggleButton">toggle</button>
+    <router-link to="/">ProductList</router-link> |
+    <router-link to="/form">Form</router-link>
+    <router-view />
   </div>
 </template>
 
@@ -27,7 +29,7 @@ export default defineComponent({
 </script>
 
 <style>
-.app {
+#app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

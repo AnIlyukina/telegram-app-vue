@@ -38,6 +38,7 @@ export default defineComponent({
   display: flex;
   align-items: center;
   padding: 0 20px;
+  box-sizing: border-box;
 }
 
 .username {
