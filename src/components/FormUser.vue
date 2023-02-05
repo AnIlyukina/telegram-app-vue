@@ -63,9 +63,9 @@ export default defineComponent({
 
     watchEffect(() => {
       if (!!city.value && !!street.value) {
-        tg.MainButton.hide()
-      } else {
         tg.MainButton.show()
+      } else {
+        tg.MainButton.hide()
       }
     }, {  
       flush: 'post'
