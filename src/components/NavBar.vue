@@ -1,17 +1,18 @@
 <template>
-  <div class="header">
+  <v-row class="header">
     <tg-button @click="onClose">Закрыть</tg-button>
     <span class="username">
       {{ username }}
     </span>
-  </div>
-  
+  </v-row>
+
 </template>
 
 <script>
 import { defineComponent } from 'vue';
-import TgButton from './TgButton.vue';
 import { useTelegram } from '@/hooks/useTelegram.js'
+
+import TgButton from './TgButton.vue';
 export default defineComponent({
   name: "NavBar",
   components: { TgButton },
@@ -20,8 +21,6 @@ export default defineComponent({
     // приложение проинициализировалось
     tg.ready()
 
-  
-    
     return {
       onClose,
       username
@@ -37,8 +36,8 @@ export default defineComponent({
   height: 50px;
   display: flex;
   align-items: center;
-  padding: 0 20px;
   box-sizing: border-box;
+  margin-bottom: 10px;
 }
 
 .username {

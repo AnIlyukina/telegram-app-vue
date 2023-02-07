@@ -1,5 +1,5 @@
 
-import { createWebHistory, createRouter } from "vue-router";
+import { createWebHistory, createRouter } from 'vue-router';
 import ProductList from "@/components/ProductList.vue";
 import FormUser from "@/components/FormUser.vue";
 

@@ -1,27 +1,24 @@
 <template>
-  <div class="app">
+  <v-container class="app">
     <nav-bar/>
     <router-view />
-  </div>
+  </v-container>
 </template>
 
 <script>
 import { defineComponent } from 'vue';
 import NavBar from '@/components/NavBar.vue'
 import { useTelegram } from '@/hooks/useTelegram.js'
+
 export default defineComponent({
   name: 'App',
   components: {
     NavBar
   },
   setup() {
-    const {tg, onToggleButton}  = useTelegram()
+    const { tg }  = useTelegram()
     // приложение проинициализировалось
     tg.ready()
-   
-    return {
-      onToggleButton
-    }
   }
 });
 </script>

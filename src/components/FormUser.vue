@@ -1,103 +1,127 @@
 <template>
-  <div class="form">
-    <h3>Введите ваши данные</h3> 
-    <input 
-      v-model="city"
-      class='input'
-      type="text"
-      placeholder="Город"/>
-    <input
-      v-model="street"
-      class='input'
-      type="text"
-      placeholder="Улица"/>
-    <select
-      v-model="subject"
-      class="select">
-      <option value="physical">
-        Физ. лицо 
-      </option>
-      <option value="legal">
-        Юр. лицо 
-      </option>
-    </select>
-  </div>
+  <v-form ref="form">
+    <h3 class="mb-4">Введите ваши данные</h3>
+      <v-text-field
+        v-model="stateForm.city"
+        :error-messages="v$.city.$errors.map(e => e.$message)"
+        label="Город"
+        required
+      />
+      <v-text-field
+        v-model="stateForm.address"
+        :error-messages="v$.address.$errors.map(e => e.$message)"
+        label="Адрес"
+        required
+      />
+      <v-row>
+        <v-col
+          cols="6">
+          <v-text-field
+            v-model="stateForm.intercom"
+            :error-messages="v$.intercom.$errors.map(e => e.$message)"
+            label="Домофон"
+            required
+          />
+        </v-col>
+        <v-col
+          cols="6">
+          <v-text-field
+          v-model="stateForm.floor"
+          :error-messages="v$.floor.$errors.map(e => e.$message)"
+          label="Этаж"
+          required
+        />
+        </v-col>
+      </v-row>
+      <v-select
+        v-model="stateForm.paymentSelected"
+        :error-messages="v$.paymentSelected.$errors.map(e => e.$message)"
+        label="Способ оплаты"
+        :items="paymentTypes"
+        item-title="type"
+        item-value="value"
+        required
+      />
+  </v-form>
 </template>
 
 <script>
-import { defineComponent, watchEffect, ref, onMounted,onUnmounted } from 'vue'
+import { defineComponent, ref, reactive, onMounted, onUnmounted } from 'vue'
 import { useTelegram } from '@/hooks/useTelegram.js'
+
+import { useVuelidate } from '@vuelidate/core'
+import {  required } from '@vuelidate/validators'
 
 export default defineComponent({
   name: 'FormUser',
   setup() {
-    const { tg } = useTelegram()
-    
-    let city = ref('')
-    let street = ref('')
-    let subject = ref('physical')
-    tg.onEvent('mainButtonClicked', onSendData)
-
-
-    // onMounted(()=> {
-    //   console.log('mounted')
-    //   tg.mainButton.setParams({
-    //     text: 'Отправить данные'
-    //   })
-    //   eslint-disable-next-line no-undef
-    //   tg.onEvent('mainButtonClicked', onSendData)
-    // })
-    function onSendData() {
-      const data = {
-        city: city.value,
-        street: street.value,
-        subject: subject.value
+    const paymentTypes = ref([
+      {
+        type: 'Наличными курьеру',
+        value: 'cash'
+      },
+      {
+        type: 'Картой курьеру',
+        value: 'card'
       }
-      tg.sendData(JSON.stringify(data))
+    ])
+
+    const initialStateFrom = {
+      city: '',
+      address: '',
+      intercom: '',
+      floor: '',
+      paymentSelected: ''
     }
 
+    const stateForm = reactive({
+      ...initialStateFrom,
+    })
+
+    const { tg } = useTelegram()
+
+    const rules = {
+      city: { required },
+      address: { required },
+      intercom: { required },
+      floor: { required },
+      paymentSelected: { required },
+    }
+
+    const v$ = useVuelidate(rules, stateForm)
+
+
+    onMounted(()=> {
+      tg.MainButton.setParams({
+        text: 'Отправить данные',
+        is_visible: true
+      })
+
+      tg.onEvent('mainButtonClicked', onSendData)
+    })
+
+    // отправка данных в телегу
+    async function onSendData() {
+      const result = await this.v$.$validate()
+      if (!result) {
+        return
+      }
+      tg.sendData(JSON.stringify(stateForm))
+    }
+
+
+
     onUnmounted(() => {
-      // eslint-disable-next-line no-undef
       tg.offEvent('mainButtonClicked', onSendData)
     })
 
-
-
-    watchEffect(() => {
-      if (!!city.value && !!street.value) {
-        tg.MainButton.show()
-      } else {
-        tg.MainButton.hide()
-      }
-    }, {  
-      flush: 'post'
-    });
-
     return {
-      city,
-      street,
-      subject
+      stateForm,
+      paymentTypes,
+      onSendData,
+      v$
     }
   }
 })
 </script>
 
-<style>
-.form {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
-}
-
-.input {
-  padding: 10px;
-  margin-top: 15px;
-}
-
-.select {
-  padding: 10px;
-  margin-top: 15px;
-}
-</style>
