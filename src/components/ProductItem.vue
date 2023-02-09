@@ -6,16 +6,11 @@
       src="https://klike.net/uploads/posts/2019-07/1562054103_1.jpg"
     ></v-img>
     <v-card-title>{{ product.title }}</v-card-title>
-
-    <v-card-text>
-
-    </v-card-text>
-
-    <v-divider class="mx-4"></v-divider>
+    <v-divider class="mx-2"></v-divider>
     <v-card-text>
       <v-chip-group
         v-model="selection"
-        active-class="deep-purple accent-4 white--text"
+        active-class="deep-purple accent-2 white--text"
         column
       >
         <v-chip>200мл</v-chip>

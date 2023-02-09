@@ -1,4 +1,6 @@
 <template>
+  <router-link to="/form" class="v-btn">Продолжить</router-link>
+  <div>Цена : {{ totalPrice }} p</div>
   <ul class="list">
     <li
       v-for="product in products"
@@ -50,33 +52,33 @@ export default defineComponent({
       }, 0)
     })
 
-    onMounted(() => {
-      if (addedProduct.length) {
-        tg.MainButton.hide()
-      } else {
-        tg.MainButton.show()
-        tg.MainButton.setParams({
-          text: `Купить ${totalPrice.value} p.`
-        })
-      }
+    // onMounted(() => {
+    //   if (addedProduct.length) {
+    //     tg.MainButton.hide()
+    //   } else {
+    //     tg.MainButton.show()
+    //     tg.MainButton.setParams({
+    //       text: `Купить ${totalPrice.value} p.`
+    //     })
+    //   }
 
-      tg.onEvent('mainButtonClicked', onSendData)
-    })
+    //   tg.onEvent('mainButtonClicked', onSendData)
+    // })
 
-    function onSendData() {
-      const data = {
-        products: addedProduct,
-        totalPrice,
-        queryId
-      }
-      fetch('http:localhost:8080', {
-        method: "POST",
-        headers: {
-          'Content-type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      })
-    }
+    // function onSendData() {
+    //   const data = {
+    //     products: addedProduct,
+    //     totalPrice,
+    //     queryId
+    //   }
+    //   fetch('http:localhost:8080', {
+    //     method: "POST",
+    //     headers: {
+    //       'Content-type': 'application/json'
+    //     },
+    //     body: JSON.stringify(data)
+    //   })
+    // }
 
 
 
