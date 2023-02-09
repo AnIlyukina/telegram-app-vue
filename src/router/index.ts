@@ -1,7 +1,7 @@
-
 import { createWebHistory, createRouter } from 'vue-router';
 import ProductList from "@/components/ProductList.vue";
-import FormUser from "@/components/FormUser.vue";
+import FormUser from "@/components/FormDelivery.vue";
+import FormComment from "@/components/FormComment.vue";
 
 const routes = [
   {
@@ -13,6 +13,11 @@ const routes = [
     path: "/form",
     name: "Form",
     component: FormUser,
+  },
+  {
+    path: "/comment",
+    name: "FormComment",
+    component: FormComment,
   },
 ];
 

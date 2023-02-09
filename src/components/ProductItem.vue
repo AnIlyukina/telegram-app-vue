@@ -1,7 +1,43 @@
 <template>
-  <div class="product">
-    <div class="img"/>
-    <div class="title">{{ product.title }}</div>
+  <v-card
+    max-width="196"
+  >
+    <v-img
+      src="https://klike.net/uploads/posts/2019-07/1562054103_1.jpg"
+    ></v-img>
+    <v-card-title>{{ product.title }}</v-card-title>
+
+    <v-card-text>
+
+    </v-card-text>
+
+    <v-divider class="mx-4"></v-divider>
+    <v-card-text>
+      <v-chip-group
+        v-model="selection"
+        active-class="deep-purple accent-4 white--text"
+        column
+      >
+        <v-chip>200мл</v-chip>
+
+        <v-chip>250мл</v-chip>
+
+        <v-chip>300мл</v-chip>
+
+        <v-chip>350мл</v-chip>
+      </v-chip-group>
+    </v-card-text>
+
+    <v-card-actions>
+      <tg-button
+        color="deep-purple lighten-2"
+        text
+        @click="addInBasket(product)"
+      >
+        Добавить в корзину
+      </tg-button>
+    </v-card-actions>
+    <!--<v-card-title>{{ product.title }}</v-card-title>
     <div class="description">{{ product.description }}</div>
     <div class="price">
       <span>
@@ -9,10 +45,12 @@
       </span>
     </div>
     <tg-button
-      class="add-btn">
+      class="add-btn"
+      @click="addInBasket(product)"
+    >
       Добавить в корзину
-    </tg-button>
-  </div>
+    </tg-button>-->
+  </v-card>
 </template>
 
 <script>
@@ -28,6 +66,15 @@ export default defineComponent ({
         return {}
       }
     }
+  },
+  emits: ['addInBasket'],
+  setup(props, { emit }){
+    const addInBasket = (product) => {
+      emit('addInBasket', product)
+    }
+    return {
+      addInBasket
+    }
   }
 
 })
@@ -37,21 +84,17 @@ export default defineComponent ({
 .product{
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--tg-theme-button-color);
+  /*border: 1px solid var(--tg-theme-button-color);*/
+  border: 1px solid palevioletred;
   padding: 15px;
   width: 170px;
 }
-.img {
-  width: 100%;
-  background: lightgray;
-  height: 100px;
-  margin: 0 auto;
-  background: var(--tg-theme-button-color);
-}
+
 .description {
   font-size: .8em;
 }
 .add-btn {
   width: 100%;
+  background-color: #ffb8ce;
 }
 </style>

@@ -108,7 +108,7 @@ export default defineComponent({
     const { tg } = useTelegram()
 
     const rules = {
-      city: { 
+      city: {
         required: helpers.withMessage('Обязательное поле', required)
       },
       address: { required: helpers.withMessage('Обязательное поле', required) },
@@ -129,14 +129,7 @@ export default defineComponent({
     })
 
 
-     tg.onEvent('mainButtonClicked', async function onSendData() {
-
-      const result = await this.v$.$validate()
-      if (!result) {
-        return
-      }
-      tg.sendData(JSON.stringify(stateForm))
-    })
+     tg.onEvent('mainButtonClicked', onSendData)
     // отправка данных в телегу
     async function onSendData() {
 
@@ -149,10 +142,10 @@ export default defineComponent({
 
 
 
-    // onUnmounted(() => {
-    //   console.log('onUnmounted')
-    //   tg.offEvent('mainButtonClicked', onSendData)
-    // })
+    onUnmounted(() => {
+      console.log('onUnmounted')
+      tg.offEvent('mainButtonClicked', onSendData)
+    })
 
     return {
       stateForm,

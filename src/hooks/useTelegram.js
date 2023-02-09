@@ -14,11 +14,12 @@ export function useTelegram () {
  };
 
  const username = tg.initDataUnsafe?.user?.username;
-
+ const queryId = tg.initDataUnsafe?.query_id;
  return {
     tg,
     onToggleButton,
     onClose,
     username,
+     queryId
  };
 }

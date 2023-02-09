@@ -8,11 +8,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'TgButton',
-  setup (props) {
-    console.log(props, 'props')
-  }
-
+  name: 'TgButton'
 });
 </script>
 
