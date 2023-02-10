@@ -1,6 +1,8 @@
 <template>
-  <router-link to="/form" class="v-btn">Корзина</router-link>
-  <div>Цена : {{ totalPrice }} p</div>
+  <tg-button
+    @click="openFormDelivery"
+  >корзина ({{ orderProduct.length }})
+</tg-button>
   <ul class="list">
     <li
       v-for="product in products"
@@ -16,15 +18,15 @@
 </template>
 
 <script>
-import {defineComponent, reactive, computed, onMounted} from 'vue'
+import {defineComponent, reactive, computed} from 'vue'
+import { useRouter } from 'vue-router'
 import ProductItem from './ProductItem.vue'
+import TgButton from './TgButton.vue'
 
-import { useTelegram } from '../hooks/useTelegram'
 export default defineComponent({
-  components: { ProductItem },
+  components: { ProductItem, TgButton },
   name: 'ProductList',
   setup() {
-    const { tg, queryId } = useTelegram()
     const products = [
       {
         id: 1,
@@ -88,18 +90,19 @@ export default defineComponent({
         id: 6,
         title: 'Гляссе',
         price: 500,
-        description: ''
+        description: '',
+        variants: [
+          {volume: 200, price: 100},
+          {volume: 250, price: 150},
+          {volume: 300, price: 200},
+          {volume: 350, price: 250},
+        ],
       },
     ]
 
     let orderProduct = reactive([])
 
     const addInBasket = (product) => {
-      // let indexProduct = orderProduct.findIndex(item => item.id === product.id)
-      // if (indexProduct !== -1) {
-      //   orderProduct.splice(indexProduct, 1)
-      //   return
-      // }
       orderProduct.push(product)
     }
 
@@ -109,42 +112,18 @@ export default defineComponent({
       }, 0)
     })
 
-    // onMounted(() => {
-    //   if (addedProduct.length) {
-    //     tg.MainButton.hide()
-    //   } else {
-    //     tg.MainButton.show()
-    //     tg.MainButton.setParams({
-    //       text: `Купить ${totalPrice.value} p.`
-    //     })
-    //   }
 
-    //   tg.onEvent('mainButtonClicked', onSendData)
-    // })
-
-    // function onSendData() {
-    //   const data = {
-    //     products: addedProduct,
-    //     totalPrice,
-    //     queryId
-    //   }
-    //   fetch('http:localhost:8080', {
-    //     method: "POST",
-    //     headers: {
-    //       'Content-type': 'application/json'
-    //     },
-    //     body: JSON.stringify(data)
-    //   })
-    // }
-
-
-
+    const router = useRouter() 
+    const openFormDelivery = () => {
+      router.push('/form')
+    }
 
     return {
       products,
       orderProduct,
       totalPrice,
-      addInBasket
+      addInBasket,
+      openFormDelivery
     }
 
   }
