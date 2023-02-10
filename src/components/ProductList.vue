@@ -1,10 +1,11 @@
 <template>
-  <router-link to="/form" class="v-btn">Продолжить</router-link>
+  <router-link to="/form" class="v-btn">Корзина</router-link>
   <div>Цена : {{ totalPrice }} p</div>
   <ul class="list">
     <li
       v-for="product in products"
       :key="product.id"
+      class="mr-2 mb-2"
       >
       <product-item
         :product="product"
@@ -23,31 +24,87 @@ export default defineComponent({
   components: { ProductItem },
   name: 'ProductList',
   setup() {
-    const { tg, queryId} = useTelegram()
+    const { tg, queryId } = useTelegram()
     const products = [
-      { id: 1, title: 'Кофе1', price: 100, description: '' },
-      { id: 2, title: 'Кофе2', price: 100, description: '' },
-      { id: 3, title: 'Кофе3', price: 200, description: '' },
-      { id: 4, title: 'Кофе4', price: 300, description: '' },
-      { id: 5, title: 'Кофе5', price: 400, description: '' },
-      { id: 6, title: 'Кофе6', price: 500, description: '' },
-      { id: 7, title: 'Кофе7', price: 700, description: '' },
-      { id: 8, title: 'Кофе8', price: 600, description: '' },
+      {
+        id: 1,
+        title: 'Капучино',
+        variants: [
+          {volume: 200, price: 100},
+          {volume: 250, price: 150},
+          {volume: 300, price: 200},
+          {volume: 350, price: 250},
+        ],
+        description: 'бла бла бла бла'
+      },
+      { id: 2,
+        title: 'Латте',
+        price: 100,
+        description: '',
+        variants: [
+          {volume: 200, price: 100},
+          {volume: 250, price: 150},
+          {volume: 300, price: 200},
+          {volume: 350, price: 250},
+        ],
+      },
+      {
+        id: 3,
+        title: 'Флэт Уайт',
+        price: 200,
+        description: '',
+        variants: [
+          {volume: 200, price: 100},
+          {volume: 250, price: 150},
+          {volume: 300, price: 200},
+          {volume: 350, price: 250},
+        ],
+      },
+      {
+        id: 4,
+        title: 'Раф кофе',
+        price: 300,
+        variants: [
+          {volume: 200, price: 100},
+          {volume: 250, price: 150},
+          {volume: 300, price: 200},
+          {volume: 350, price: 250},
+        ],
+        description: ''
+      },
+      {
+        id: 5,
+        title: 'Мокко',
+        price: 400,
+        variants: [
+          {volume: 200, price: 100},
+          {volume: 250, price: 150},
+          {volume: 300, price: 200},
+          {volume: 350, price: 250},
+        ],
+        description: ''
+      },
+      {
+        id: 6,
+        title: 'Гляссе',
+        price: 500,
+        description: ''
+      },
     ]
 
-    let addedProduct = reactive([])
+    let orderProduct = reactive([])
 
     const addInBasket = (product) => {
-      let indexProduct = addedProduct.findIndex(item => item.id === product.id)
-      if (indexProduct !== -1) {
-        addedProduct.splice(indexProduct, 1)
-        return
-      }
-      addedProduct.push(product)
+      // let indexProduct = orderProduct.findIndex(item => item.id === product.id)
+      // if (indexProduct !== -1) {
+      //   orderProduct.splice(indexProduct, 1)
+      //   return
+      // }
+      orderProduct.push(product)
     }
 
     let totalPrice = computed(() => {
-      return addedProduct.reduce((acc, item) => {
+      return orderProduct.reduce((acc, item) => {
         return acc += item.price
       }, 0)
     })
@@ -85,7 +142,7 @@ export default defineComponent({
 
     return {
       products,
-      addedProduct,
+      orderProduct,
       totalPrice,
       addInBasket
     }
