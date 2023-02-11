@@ -78,6 +78,7 @@ import { useTelegram } from '@/hooks/useTelegram.js'
 
 import { useVuelidate } from '@vuelidate/core'
 import {  required, helpers } from '@vuelidate/validators'
+import { useRoute, useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'FormUser',
@@ -119,16 +120,15 @@ export default defineComponent({
 
     const v$ = useVuelidate(rules, stateForm)
 
-
-    onMounted(()=> {
-      console.log('onMounted')
+    onMounted(async()=> {
+      tg.onEvent('mainButtonClicked', onSendData)
       tg.MainButton.setParams({
         text: 'Заказать',
         is_visible: true
       })
-      tg.onEvent('mainButtonClicked', onSendData)
-    })
 
+          console.log( history.state, 'order')
+    })
 
     // отправка данных в телегу
     async function onSendData() {
@@ -139,8 +139,6 @@ export default defineComponent({
       }
       tg.sendData(JSON.stringify(stateForm))
     }
-
-
 
     onUnmounted(() => {
       tg.offEvent('mainButtonClicked', onSendData)

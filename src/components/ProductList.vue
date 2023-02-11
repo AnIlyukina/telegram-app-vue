@@ -18,10 +18,11 @@
 </template>
 
 <script>
-import {defineComponent, reactive, computed} from 'vue'
+import {defineComponent, reactive, computed, onMounted, watchEffect} from 'vue'
 import { useRouter } from 'vue-router'
 import ProductItem from './ProductItem.vue'
 import TgButton from './TgButton.vue'
+import { useTelegram } from '@/hooks/useTelegram.js'
 
 export default defineComponent({
   components: { ProductItem, TgButton },
@@ -30,74 +31,73 @@ export default defineComponent({
     const products = [
       {
         id: 1,
-        title: 'Капучино',
+        name: 'Капучино',
         variants: [
-          {volume: 200, price: 100},
-          {volume: 250, price: 150},
-          {volume: 300, price: 200},
-          {volume: 350, price: 250},
-        ],
-        description: 'бла бла бла бла'
+          {id: 1, volume: 200, price: 100},
+          {id: 2, volume: 250, price: 150},
+          {id: 3, volume: 300, price: 200},
+          {id: 4, volume: 350, price: 250},
+        ]
       },
       { id: 2,
-        title: 'Латте',
-        price: 100,
-        description: '',
+        name: 'Латте',
         variants: [
-          {volume: 200, price: 100},
-          {volume: 250, price: 150},
-          {volume: 300, price: 200},
-          {volume: 350, price: 250},
-        ],
+          {id: 1, volume: 200, price: 100},
+          {id: 2, volume: 250, price: 150},
+          {id: 3, volume: 300, price: 200},
+          {id: 4, volume: 350, price: 250},
+        ]
       },
       {
         id: 3,
-        title: 'Флэт Уайт',
-        price: 200,
-        description: '',
+        name: 'Флэт Уайт',
         variants: [
-          {volume: 200, price: 100},
-          {volume: 250, price: 150},
-          {volume: 300, price: 200},
-          {volume: 350, price: 250},
+          {id: 1, volume: 200, price: 100},
+          {id: 2, volume: 250, price: 150},
+          {id: 3, volume: 300, price: 200},
+          {id: 4, volume: 350, price: 250},
         ],
       },
       {
         id: 4,
-        title: 'Раф кофе',
+        name: 'Раф кофе',
         price: 300,
         variants: [
-          {volume: 200, price: 100},
-          {volume: 250, price: 150},
-          {volume: 300, price: 200},
-          {volume: 350, price: 250},
+          {id: 1, volume: 200, price: 100},
+          {id: 2, volume: 250, price: 150},
+          {id: 3, volume: 300, price: 200},
+          {id: 4, volume: 350, price: 250},
         ],
-        description: ''
       },
       {
         id: 5,
-        title: 'Мокко',
+        name: 'Мокко',
         price: 400,
         variants: [
-          {volume: 200, price: 100},
-          {volume: 250, price: 150},
-          {volume: 300, price: 200},
-          {volume: 350, price: 250},
+          {id: 1, volume: 200, price: 100},
+          {id: 2, volume: 250, price: 150},
+          {id: 3, volume: 300, price: 200},
+          {id: 4, volume: 350, price: 250},
         ],
-        description: ''
       },
       {
         id: 6,
-        title: 'Гляссе',
+        name: 'Гляссе',
         price: 500,
-        description: '',
         variants: [
-          {volume: 200, price: 100},
-          {volume: 250, price: 150},
-          {volume: 300, price: 200},
-          {volume: 350, price: 250},
+          {id: 1, volume: 200, price: 100},
+          {id: 2, volume: 250, price: 150},
+          {id: 3, volume: 300, price: 200},
+          {id: 4, volume: 350, price: 250},
         ],
+        toppingGroups: [1,2,3]
       },
+    ]
+
+    const syrups = [
+          {id: 1, name: 'Без сиропа', price: 0 },
+          {id: 2, name: 'Карамельный', price: 30 },
+          {id: 3, name: 'Кокос', price: 30  }
     ]
 
     let orderProduct = reactive([])
@@ -112,11 +112,46 @@ export default defineComponent({
       }, 0)
     })
 
+    const { tg } = useTelegram()
+ 
+    onMounted(()=> {
+      tg.onEvent('mainButtonClicked', openFormDelivery)
+      tg.MainButton.setParams({
+        text: `В корзину (${orderProduct.length})`,
+        is_visible: true
+      })
+    })
+
+    watchEffect(
+      () => {
+        if (orderProduct.length) {
+          console.log('показываем')
+          tg.MainButton.enable()
+        } else {
+          console.log('блочим')
+          tg.MainButton.disable()
+        }
+      },
+      {
+        flush: 'post'
+      }
+    )
+
 
     const router = useRouter() 
     const openFormDelivery = () => {
-      router.push('/form')
+      if(orderProduct.length) {
+        router.push({
+        name: 'FormDelivery',
+        state: { order: sortOrder.value }
+      })
+      }
     }
+
+    let sortOrder = computed(() => {
+      // надо сгруппировать заказ
+      return []
+    })
 
     return {
       products,
