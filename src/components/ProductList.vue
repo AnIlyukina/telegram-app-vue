@@ -116,19 +116,18 @@ export default defineComponent({
  
     onMounted(()=> {
       tg.onEvent('mainButtonClicked', openFormDelivery)
-      tg.MainButton.setParams({
-        text: `В корзину (${orderProduct.length})`,
-        is_visible: true
-      })
+      console.log('s')
     })
 
     watchEffect(
       () => {
+          tg.MainButton.setParams({
+            text: `В корзину (${orderProduct.length})`,
+            is_visible: true
+          })
         if (orderProduct.length) {
-          console.log('показываем')
           tg.MainButton.enable()
         } else {
-          console.log('блочим')
           tg.MainButton.disable()
         }
       },
@@ -143,14 +142,27 @@ export default defineComponent({
       if(orderProduct.length) {
         router.push({
         name: 'FormDelivery',
-        state: { order: sortOrder.value }
+        state: { order: groupByCoffee.value }
       })
       }
     }
 
-    let sortOrder = computed(() => {
-      // надо сгруппировать заказ
-      return []
+    const groupByCoffee = computed(() => {
+      // группировка по кофе
+      let groups = orderProduct.reduce((acc, cur) => {
+        acc[cur.id] = acc[cur.id] || { 
+          id: cur.id,
+          name: cur.name,
+          variants: []
+        }
+        acc[cur.id].variants.push({
+          volume: cur.volume,
+          price: cur.price
+        })
+        return acc
+      }, {})
+
+      return groups
     })
 
     return {
@@ -158,7 +170,8 @@ export default defineComponent({
       orderProduct,
       totalPrice,
       addInBasket,
-      openFormDelivery
+      openFormDelivery,
+      groupByCoffee
     }
 
   }

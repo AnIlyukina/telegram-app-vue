@@ -65,7 +65,6 @@ export default defineComponent ({
   emits: ['addInBasket'],
   setup(props, { emit }){
     const { product } = toRefs(props)
-    console.log(product, 'product')
     const addInBasket = () => {
       let selected = {
         id: product.value.id,
@@ -73,7 +72,6 @@ export default defineComponent ({
         volume: product.value.variants[selectedVolume.value].volume,
         price: price.value
       }
-      console.log(selected)
       emit('addInBasket', selected)
     }
 

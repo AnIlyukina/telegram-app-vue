@@ -1,7 +1,20 @@
 <template>
   <v-form ref="form">
     <h4 class="mb-4">Ваш заказ</h4>
-    <div class="mb-3">
+    <div 
+      v-for="(product, index) in order"
+      :key="product.id"
+      class="text-start"
+      >
+      {{index}}) {{ product.name }}
+      <p
+        v-for="(variant, index) in product.variants"
+        :key="index"
+        >
+        {{ variant.volume }}мл - {{ variant.price }}p. 
+      </p>
+    </div>
+    <div class="mb-3 mt-3">
         <v-text-field
         v-model="stateForm.city"
         :error-messages="v$.city.$errors.map(e => e.$message)"
@@ -120,14 +133,15 @@ export default defineComponent({
 
     const v$ = useVuelidate(rules, stateForm)
 
-    onMounted(async()=> {
+    let order = ref([])
+    onMounted(()=> {
       tg.onEvent('mainButtonClicked', onSendData)
       tg.MainButton.setParams({
         text: 'Заказать',
         is_visible: true
       })
-
-          console.log( history.state, 'order')
+      console.log(history.state.order)
+      order.value = history.state.order
     })
 
     // отправка данных в телегу
@@ -148,6 +162,7 @@ export default defineComponent({
       stateForm,
       paymentTypes,
       onSendData,
+      order,
       v$
     }
   }
