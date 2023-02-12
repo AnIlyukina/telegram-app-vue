@@ -149,12 +149,7 @@ export default defineComponent({
     
     tg.onEvent('mainButtonClicked', onSendData)
     // отправка данных в телегу
-    async function onSendData() {
-
-      const result = await this.v$.$validate()
-      if (!result) {
-        return
-      }
+    function onSendData() {
       tg.sendData(JSON.stringify(stateForm))
     }
 
