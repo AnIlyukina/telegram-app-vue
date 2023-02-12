@@ -1,9 +1,11 @@
 <template>
+  <!--
   <tg-button
-    @click="openFormDelivery"
-  >корзина ({{ orderProduct.length }})
-</tg-button>
-  <ul class="list">
+      @click="openFormDelivery"
+    >корзина ({{ orderProduct.length }})
+  </tg-button>
+  -->
+  <ul class="list mt-4">
     <li
       v-for="product in products"
       :key="product.id"
@@ -18,14 +20,17 @@
 </template>
 
 <script>
-import {defineComponent, reactive, computed, onMounted, watchEffect} from 'vue'
+import {defineComponent, reactive, computed, onMounted, watchEffect, onUnmounted} from 'vue'
 import { useRouter } from 'vue-router'
 import ProductItem from './ProductItem.vue'
-import TgButton from './TgButton.vue'
+// import TgButton from './TgButton.vue'
 import { useTelegram } from '@/hooks/useTelegram.js'
 
 export default defineComponent({
-  components: { ProductItem, TgButton },
+  components: { 
+    ProductItem, 
+    // TgButton 
+  },
   name: 'ProductList',
   setup() {
     const products = [
@@ -165,6 +170,10 @@ export default defineComponent({
       return groups
     })
 
+
+    onUnmounted(() => {
+      tg.offEvent('mainButtonClicked', openFormDelivery)
+    })
     return {
       products,
       orderProduct,

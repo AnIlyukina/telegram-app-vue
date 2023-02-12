@@ -3,7 +3,9 @@
     max-width="160"
   >
     <v-img
-      src="https://avatars.mds.yandex.net/i?id=5da1a3a0b188275b2cf37ea9eff47f5da3820019-8371311-images-thumbs&n=13"
+      height="100"
+      cover
+      src="https://www.smilegifts.ru/image/cache/catalog/img/Sim-0519/termostakan-kofe/02-800x800.jpg"
     ></v-img>
     <v-card-title class="py-0">{{ product.name }}</v-card-title>
     <v-divider class="my-0"></v-divider>

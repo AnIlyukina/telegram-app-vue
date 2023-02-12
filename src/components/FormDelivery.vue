@@ -133,17 +133,21 @@ export default defineComponent({
 
     const v$ = useVuelidate(rules, stateForm)
 
+    tg.onEvent('mainButtonClicked', onSendData)
     let order = ref([])
     onMounted(()=> {
       tg.onEvent('mainButtonClicked', onSendData)
+      
       tg.MainButton.setParams({
         text: 'Заказать',
         is_visible: true
       })
       console.log(history.state.order)
       order.value = history.state.order
+      tg.onEvent('mainButtonClicked', onSendData)
     })
-
+    
+    tg.onEvent('mainButtonClicked', onSendData)
     // отправка данных в телегу
     async function onSendData() {
 
