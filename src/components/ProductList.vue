@@ -1,10 +1,8 @@
 <template>
-  <!--
   <tg-button
       @click="openFormDelivery"
     >корзина ({{ orderProduct.length }})
   </tg-button>
-  -->
   <ul class="list mt-4">
     <li
       v-for="product in products"
@@ -23,13 +21,13 @@
 import {defineComponent, reactive, computed, onMounted, watchEffect, onUnmounted} from 'vue'
 import { useRouter } from 'vue-router'
 import ProductItem from './ProductItem.vue'
-// import TgButton from './TgButton.vue'
+import TgButton from './TgButton.vue'
 import { useTelegram } from '@/hooks/useTelegram.js'
 
 export default defineComponent({
-  components: { 
-    ProductItem, 
-    // TgButton 
+  components: {
+    ProductItem,
+    TgButton
   },
   name: 'ProductList',
   setup() {
@@ -111,17 +109,11 @@ export default defineComponent({
       orderProduct.push(product)
     }
 
-    let totalPrice = computed(() => {
-      return orderProduct.reduce((acc, item) => {
-        return acc += item.price
-      }, 0)
-    })
-
     const { tg } = useTelegram()
- 
+
     onMounted(()=> {
+      console.log('onMounted')
       tg.onEvent('mainButtonClicked', openFormDelivery)
-      console.log('s')
     })
 
     watchEffect(
@@ -142,32 +134,32 @@ export default defineComponent({
     )
 
 
-    const router = useRouter() 
+    const router = useRouter()
     const openFormDelivery = () => {
       if(orderProduct.length) {
         router.push({
         name: 'FormDelivery',
-        state: { order: groupByCoffee.value }
+        state: { order: groupedOrder.value }
       })
       }
     }
 
-    const groupByCoffee = computed(() => {
-      // группировка по кофе
+    const groupedOrder = computed(() => {
+      // группирую по миллитрам и id
       let groups = orderProduct.reduce((acc, cur) => {
-        acc[cur.id] = acc[cur.id] || { 
+        let key = cur.id + cur.volume
+        acc[key] = acc[key] || {
           id: cur.id,
           name: cur.name,
-          variants: []
-        }
-        acc[cur.id].variants.push({
           volume: cur.volume,
-          price: cur.price
-        })
+          price: cur.price,
+          count: 0
+        }
+        acc[key].count += 1
         return acc
       }, {})
 
-      return groups
+      return Object.values(groups)
     })
 
 
@@ -177,10 +169,8 @@ export default defineComponent({
     return {
       products,
       orderProduct,
-      totalPrice,
       addInBasket,
-      openFormDelivery,
-      groupByCoffee
+      openFormDelivery
     }
 
   }

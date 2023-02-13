@@ -15,22 +15,16 @@
       <v-chip-group
         v-model="selectedVolume"
         center-active
-        active-class="deep-purple accent-4 white--text"
         column
+        class="justify-center"
       >
         <v-chip
-          class="mr-4"
-        >200мл</v-chip>
-
-        <v-chip
-          class="mr-0">250мл</v-chip>
-
-        <v-chip
-          class="mr-4"
-        >300мл</v-chip>
-
-        <v-chip
-          class="mr-0">350мл</v-chip>
+          v-for="(variant, index) in product.variants"
+          :key="index"
+          :class="index % 2 !== 0 ? 'mr-0' : 'mr-3 ml-1' "
+        >
+          {{ variant.volume }}мл
+        </v-chip>
       </v-chip-group>
     </v-card-text>
 
@@ -78,7 +72,7 @@ export default defineComponent ({
     }
 
     const selectedVolume = ref(0)
-    
+
     const price = computed(() => {
       return product.value.variants[selectedVolume.value].price
     })

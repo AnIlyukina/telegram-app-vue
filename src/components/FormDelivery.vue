@@ -1,20 +1,40 @@
 <template>
   <v-form ref="form">
     <h4 class="mb-4">Ваш заказ</h4>
-    <div 
+    <div
       v-for="(product, index) in order"
       :key="product.id"
-      class="text-start"
+      class="text-start mb-3"
       >
-      {{index}}) {{ product.name }}
+        {{index + 1}}) {{ product.name }} {{ product.volume }}мл.
+      <v-btn
+        size="x-small"
+        color="blue-grey"
+        class="ml-4"
+        @click="decrementCount(index)"
+      >
+        -
+      </v-btn>
+        {{ product.count }} шт
+      <v-btn
+        size="x-small"
+        color="blue-grey"
+        class="mr-2"
+        @click="incrementCount(index)"
+      >
+        +
+      </v-btn>
+        - {{ product.count * product.price }}р.
       <p
         v-for="(variant, index) in product.variants"
         :key="index"
         >
-        {{ variant.volume }}мл - {{ variant.price }}p. 
+        {{ variant.volume }}мл - {{ variant.price }}p.
       </p>
     </div>
-    <div class="mb-3 mt-3">
+    <v-divider></v-divider>
+    <p class="mt-1">Итого: {{ totalPrice }} p.</p>
+    <div class="mb-3 mt-2">
         <v-text-field
         v-model="stateForm.city"
         :error-messages="v$.city.$errors.map(e => e.$message)"
@@ -86,13 +106,11 @@
 </template>
 
 <script>
-import { defineComponent, ref, reactive, onMounted, onUnmounted } from 'vue'
+import {defineComponent, ref, reactive, onMounted, onUnmounted, computed} from 'vue'
 import { useTelegram } from '@/hooks/useTelegram.js'
 
 import { useVuelidate } from '@vuelidate/core'
 import {  required, helpers } from '@vuelidate/validators'
-import { useRoute, useRouter } from 'vue-router'
-
 export default defineComponent({
   name: 'FormUser',
   setup() {
@@ -133,25 +151,47 @@ export default defineComponent({
 
     const v$ = useVuelidate(rules, stateForm)
 
-    tg.onEvent('mainButtonClicked', onSendData)
     let order = ref([])
+
+    // отправка данных в телегу
+    async function onSendData() {
+      const result = await this.v$.$validate()
+      if (!result) {
+        return
+      }
+      let data = {...stateForm}
+      data.order = order.value
+      data.price = totalPrice.value
+      console.log(data, 'отправил')
+      tg.sendData(JSON.stringify(data))
+    }
+
+
     onMounted(()=> {
       tg.onEvent('mainButtonClicked', onSendData)
-      
       tg.MainButton.setParams({
         text: 'Заказать',
         is_visible: true
       })
-      console.log(history.state.order)
       order.value = history.state.order
-      tg.onEvent('mainButtonClicked', onSendData)
     })
-    
-    tg.onEvent('mainButtonClicked', onSendData)
-    // отправка данных в телегу
-    function onSendData() {
-      tg.sendData(JSON.stringify(stateForm))
+
+    const decrementCount = (index) => {
+      if (order.value[index].count < 2) {
+        return
+      }
+      order.value[index].count -= 1
     }
+
+    const incrementCount = (index) => {
+      order.value[index].count += 1
+    }
+
+    let totalPrice = computed(() => {
+      return order.value.reduce((acc, item) => {
+        return acc += (item.price * item.count)
+      }, 0)
+    })
 
     onUnmounted(() => {
       tg.offEvent('mainButtonClicked', onSendData)
@@ -162,7 +202,10 @@ export default defineComponent({
       paymentTypes,
       onSendData,
       order,
-      v$
+      v$,
+      decrementCount,
+      incrementCount,
+      totalPrice
     }
   }
 })
