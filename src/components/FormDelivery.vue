@@ -44,6 +44,7 @@
         variant="outlined"
         clearable
         required
+        density="compact"
       />
     </div>
     <div class="mb-3">
@@ -56,6 +57,7 @@
         required
         color="primary"
         variant="outlined"
+        density="compact"
       />
     </div>
     <v-row class="mb-3">
@@ -71,6 +73,7 @@
           required
           color="primary"
           variant="outlined"
+          density="compact"
         />
       </v-col>
       <v-col
@@ -84,6 +87,7 @@
         required
         color="primary"
         variant="outlined"
+        density="compact"
       />
       </v-col>
     </v-row>
@@ -96,6 +100,7 @@
       item-value="value"
       color="primary"
       variant="outlined"
+      density="compact"
       required
     />
 
