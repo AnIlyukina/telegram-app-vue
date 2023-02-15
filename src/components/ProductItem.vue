@@ -22,6 +22,7 @@
           v-for="(variant, index) in product.variants"
           :key="index"
           :class="index % 2 !== 0 ? 'mr-0' : 'mr-3 ml-1' "
+          color="indigo"
         >
           {{ variant.volume }}мл
         </v-chip>
@@ -36,7 +37,7 @@
         <tg-button
           @click="addInBasket(product)"
         >
-          +
+          <v-icon icon="mdi-plus"></v-icon>
         </tg-button>
       </v-card-actions>
     </v-card-text>
@@ -58,7 +59,7 @@ export default defineComponent ({
       }
     }
   },
-  emits: ['addInBasket'],
+  emits: ['addInOrder'],
   setup(props, { emit }){
     const { product } = toRefs(props)
     const addInBasket = () => {
@@ -68,7 +69,7 @@ export default defineComponent ({
         volume: product.value.variants[selectedVolume.value].volume,
         price: price.value
       }
-      emit('addInBasket', selected)
+      emit('addInOrder', selected)
     }
 
     const selectedVolume = ref(0)

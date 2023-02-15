@@ -1,11 +1,12 @@
 <template>
-  <v-row class="header">
-    <tg-button @click="onClose">Закрыть</tg-button>
-    <span class="username">
+  <v-container>
+    <v-row class="header">
+      <tg-button @click="onClose">Закрыть</tg-button>
+      <span class="username">
       {{ username }}
     </span>
-  </v-row>
-
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -17,9 +18,7 @@ export default defineComponent({
   name: "NavBar",
   components: { TgButton },
  setup() {
-    const {tg , username, onClose} = useTelegram()
-    // приложение проинициализировалось
-    tg.ready()
+    const { username, onClose} = useTelegram()
 
     return {
       onClose,

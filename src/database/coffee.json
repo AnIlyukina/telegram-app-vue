@@ -1,0 +1,71 @@
+[
+  {
+    "id": 1,
+    "name": "Капучино",
+    "variants": [
+      { "id": 1, "volume": 200, "price": 100 },
+      { "id": 2, "volume": 250, "price": 150 },
+      { "id": 3, "volume": 300, "price": 200 },
+      { "id": 4, "volume": 350, "price": 250 }
+    ],
+    "toppingGroups": [1,2,3]
+  },
+  {
+    "id": 2,
+    "name": "Латте",
+    "variants": [
+      { "id": 1, "volume": 200, "price": 100 },
+      { "id": 2, "volume": 250, "price": 150 },
+      { "id": 3, "volume": 300, "price": 200 },
+      { "id": 4, "volume": 350, "price": 250 }
+    ],
+    "toppingGroups": [1,2,3]
+  },
+  {
+    "id": 3,
+    "name": "Флэт Уайт",
+    "variants": [
+      { "id": 1, "volume": 200, "price": 100 },
+      { "id": 2, "volume": 250, "price": 150 },
+      { "id": 3, "volume": 300, "price": 200 },
+      { "id": 4, "volume": 350, "price": 250 }
+    ],
+    "toppingGroups": [1,2,3]
+  },
+  {
+    "id": 4,
+    "name": "Раф кофе",
+    "price": 300,
+    "variants": [
+      { "id": 1, "volume": 200, "price": 100 },
+      { "id": 2, "volume": 250, "price": 150 },
+      { "id": 3, "volume": 300, "price": 200 },
+      { "id": 4, "volume": 350, "price": 250 }
+    ],
+    "toppingGroups": [1,2,3]
+  },
+  {
+    "id": 5,
+    "name": "Мокко",
+    "price": 400,
+    "variants": [
+      {"id": 1, "volume": 200, "price": 100},
+      {"id": 2, "volume": 250, "price": 150},
+      {"id": 3, "volume": 300, "price": 200},
+      {"id": 4, "volume": 350, "price": 250}
+    ],
+    "toppingGroups": [1,2,3]
+  },
+  {
+    "id": 6,
+    "name": "Гляссе",
+    "price": 500,
+    "variants": [
+      {"id": 1, "volume": 200, "price": 100},
+      {"id": 2, "volume": 250, "price": 150},
+      {"id": 3, "volume": 300, "price": 200},
+      {"id": 4, "volume": 350, "price": 250}
+    ],
+    "toppingGroups": [1,2,3]
+  }
+]

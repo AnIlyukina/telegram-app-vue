@@ -1,21 +1,13 @@
 import { createWebHistory, createRouter } from 'vue-router';
-import ProductList from "@/components/ProductList.vue";
-import FormDelivery from "@/components/FormDelivery.vue";
 import FormComment from "@/components/FormComment.vue";
+import CoffeeShop from "@/components/CoffeeShop.vue"
 
 const routes = [
   {
     path: "/",
-    name: "ProductList",
-    component: ProductList,
+    name: "CoffeeShop",
+    component: CoffeeShop,
     props: true
-  },
-  {
-    path: "/form",
-    name: "FormDelivery",
-    component: FormDelivery,
-    props: true,
-    // params: {order: routes.params.order}
   },
   {
     path: "/comment",
