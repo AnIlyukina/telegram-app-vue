@@ -11,7 +11,7 @@
         icon="mdi-minus"
         color="primary"
         class="ml-2"
-        @click="decrementCount(index)"
+        @click="decrementCount(product, index)"
       />
       {{ product.count }}
       <v-btn
@@ -19,24 +19,18 @@
         icon="mdi-plus"
         color="primary"
         class="mr-2"
-        @click="incrementCount(index)"
+        @click="incrementCount(product)"
       />
       - {{ product.count * product.price }}<small>₽</small>
     </div>
-    <v-btn
-      size="x-small"
-      color="primary"
-      icon="mdi-delete"
-      @click="deleteProduct(index)"
-    />
   </div>
   <v-divider></v-divider>
-  <p class="mt-1">Итого: {{ totalPrice }} ₽.</p>
+  <p class="mt-1 text-end">Итого: {{ totalPrice }} ₽.</p>
 </template>
 
 <script>
 
-import { defineComponent, toRefs } from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: 'OrderS',
@@ -52,26 +46,18 @@ export default defineComponent({
   },
   emits: ['changeOrder'],
   setup (props, { emit }) {
-    const { order } = toRefs(props)
 
-    const decrementCount = (index) => {
-      if (order.value[index].count < 2) {
-        return
-      }
-      emit('changeOrder', index, 'decrement')
-
+    const decrementCount = (product, index) => {
+      emit('changeOrder', product, 'decrement')
     }
 
-    const incrementCount = (index) => {
-      emit('changeOrder', index, 'increment')
-    }
-
-    const deleteProduct = (index) => {
-      emit('changeOrder', index, 'delete')
+    const incrementCount = (product) => {
+      emit('changeOrder', product, 'increment')
     }
 
     return {
-      decrementCount, incrementCount, deleteProduct
+      decrementCount,
+      incrementCount
     }
   }
 })

@@ -4,6 +4,7 @@
       <v-text-field
         v-model="stateForm.city"
         :error-messages="v$.city.$errors.map(e => e.$message)"
+        :disabled="!order.length"
         type="input"
         label="Город"
         color="primary"
@@ -16,9 +17,10 @@
     <div class="mb-3">
       <v-text-field
         v-model="stateForm.address"
+        :error-messages="v$.address.$errors.map(e => e.$message)"
+        :disabled="!order.length"
         clearable
         type="input"
-        :error-messages="v$.address.$errors.map(e => e.$message)"
         label="Адрес"
         required
         color="primary"
@@ -32,9 +34,10 @@
         cols="6">
         <v-text-field
           v-model="stateForm.intercom"
+          :error-messages="v$.intercom.$errors.map(e => e.$message)"
+          :disabled="!order.length"
           clearable
           type="input"
-          :error-messages="v$.intercom.$errors.map(e => e.$message)"
           label="Домофон"
           required
           color="primary"
@@ -46,9 +49,10 @@
         cols="6">
         <v-text-field
           v-model="stateForm.floor"
+          :error-messages="v$.floor.$errors.map(e => e.$message)"
+          :disabled="!order.length"
           clearable
           type="input"
-          :error-messages="v$.floor.$errors.map(e => e.$message)"
           label="Этаж"
           required
           color="primary"
@@ -60,8 +64,9 @@
     <v-select
       v-model="stateForm.paymentSelected"
       :error-messages="v$.paymentSelected.$errors.map(e => e.$message)"
-      label="Способ оплаты"
       :items="paymentType"
+      :disabled="!order.length"
+      label="Способ оплаты"
       item-title="type"
       item-value="value"
       color="primary"
@@ -81,6 +86,10 @@ export default defineComponent({
   props: {
     paymentType: {
       type: Array,
+      default: () => []
+    },
+    order: {
+      type:  Array,
       default: () => []
     }
   },

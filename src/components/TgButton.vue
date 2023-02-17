@@ -14,7 +14,7 @@ export default defineComponent({
 
 <style>
 .button {
-  padding: 10px 15px;
+  padding: 5px 10px;
   background: var(--tg-theme-button-color);
   color: var(--tg-theme-button-text-color);
   border: none;

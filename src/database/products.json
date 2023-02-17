@@ -1,0 +1,111 @@
+[
+  {
+    "id": 1,
+    "name": "Капучино",
+    "group": [1],
+    "relatedProduct": [1,2,3],
+    "variants": [
+      { "volume": 200, "price": 100 },
+      { "volume": 250, "price": 150 },
+      { "volume": 300, "price": 200 },
+      { "volume": 350, "price": 250 }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Латте",
+    "group": [1],
+    "relatedProduct": [1,2,3],
+    "variants": [
+      { "volume": 200, "price": 100 },
+      { "volume": 250, "price": 150 },
+      { "volume": 300, "price": 200 },
+      { "volume": 350, "price": 250 }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Флэт Уайт",
+    "group": [1],
+    "relatedProduct": [1,2,3],
+    "variants": [
+      { "volume": 200, "price": 100 },
+      { "volume": 250, "price": 150 },
+      { "volume": 300, "price": 200 },
+      { "volume": 350, "price": 250 }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Раф кофе",
+    "price": 300,
+    "group": [1],
+    "relatedProduct": [1,2,3],
+    "variants": [
+      { "volume": 200, "price": 100 },
+      { "volume": 250, "price": 150 },
+      { "volume": 300, "price": 200 },
+      { "volume": 350, "price": 250 }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Мокко",
+    "group": [1],
+    "relatedProduct": [1,2,3],
+    "variants": [
+      { "volume": 200, "price": 100},
+      { "volume": 250, "price": 150},
+      { "volume": 300, "price": 200},
+      { "volume": 350, "price": 250}
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Гляссе",
+    "group": [1],
+    "relatedProduct": [1,2,3],
+    "variants": [
+      { "volume": 200, "price": 100},
+      { "volume": 250, "price": 150},
+      { "volume": 300, "price": 200},
+      { "volume": 350, "price": 250}
+    ]
+  },
+  {
+    "id": 11,
+    "name": "без сиропа",
+    "group": [2],
+    "relatedProduct": [],
+    "variants": [
+      { "volume": 0, "price": 0}
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Карамельный",
+    "group": [2],
+    "relatedProduct": [],
+    "variants": [
+      { "volume": 30, "price": 30}
+    ]
+  },
+  {
+    "id": 13,
+    "name": "Кокосовый",
+    "group": [2],
+    "relatedProduct": [],
+    "variants": [
+      { "volume": 30, "price": 30}
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Ванильный",
+    "group": [2],
+    "relatedProduct": [],
+    "variants": [
+      { "volume": 30, "price": 30}
+    ]
+  }
+]

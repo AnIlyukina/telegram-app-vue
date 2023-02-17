@@ -14,18 +14,32 @@
       В корзине пусто :(
     </span>
     </tg-button>
-    </product-list>
+  </product-list>
   <order-details
     v-if="step === 'second'"
   >
-    <h4 class="mb-4">Ваш заказ?</h4>
-    <order-s
-      :order="order"
-      :total-price="totalPrice"
-      @changeOrder="changeOrder"
-    />
-    <h4 class="mb-4">Куда везем?</h4>
+    <tg-button
+      @click="step = 'first'"
+    >
+      Назад
+    </tg-button>
+    <div v-if="order.length">
+      <h4 class="mb-4 mt-2">Ваш заказ?</h4>
+      <order-s
+        :order="order"
+        :total-price="totalPrice"
+        @changeOrder="changeOrder"
+      />
+      <h4 class="mb-4">Куда везем?</h4>
+    </div>
+    <div
+      v-else
+      class="text-center mt-4"
+    >
+      Корзина пуста, выбери товар и возврашайся
+    </div>
     <form-delivery
+      :order="order"
       :payment-type="paymentType"
     />
   </order-details>
@@ -85,7 +99,6 @@ export default {
       {
         id: 4,
         name: 'Раф кофе',
-        price: 300,
         variants: [
           {id: 1, volume: 200, price: 100},
           {id: 2, volume: 250, price: 150},
@@ -96,7 +109,6 @@ export default {
       {
         id: 5,
         name: 'Мокко',
-        price: 400,
         variants: [
           {id: 1, volume: 200, price: 100},
           {id: 2, volume: 250, price: 150},
@@ -107,7 +119,6 @@ export default {
       {
         id: 6,
         name: 'Гляссе',
-        price: 500,
         variants: [
           {id: 1, volume: 200, price: 100},
           {id: 2, volume: 250, price: 150},
@@ -180,17 +191,16 @@ export default {
       }
     }
 
-    const changeOrder = (index, action) => {
-      console.log(index, action)
+    const changeOrder = (product, action) => {
+      delete product['count']
+      let deleteIndex
       switch (action) {
         case 'increment':
-          order.value[index].count += 1
+          orderProducts.push(product)
           break;
         case 'decrement':
-          order.value[index].count -= 1
-          break;
-        case 'delete':
-          order.value.splice(index, 1)
+          deleteIndex = orderProducts.findIndex(orderProduct => orderProduct.id === product.id )
+          orderProducts.splice(deleteIndex, 1)
           break;
         default:
           alert( "Ошибка, которой быть не должно и быть не может" );
