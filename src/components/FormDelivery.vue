@@ -129,14 +129,22 @@ export default defineComponent({
     const v$ = useVuelidate(rules, stateForm)
     const { tg }  = useTelegram()
     // const { order, totalPrice } = toRefs(props)
-    window.Telegram.WebApp.onEvent('mainButtonClicked', sendOrder)
+    window.Telegram.WebApp.onEvent('mainButtonClicked', function sendOrder() {
+      // const result = await this.v$.$validate()
+      // if (!result) {
+      //   return
+      // }
+      let data = {...stateForm}
+      // data.order = order.value
+      // data.price = totalPrice.value
+      console.log(data, 'отправил')
+      tg.sendData("ehf")
+    })
     onMounted(() => {
-      window.Telegram.WebApp.onEvent('mainButtonClicked', sendOrder)
       tg.MainButton.setParams({
         text: 'Заказать',
         is_visible: true
       })
-      window.Telegram.WebApp.onEvent('mainButtonClicked', sendOrder)
       console.log('onMounted')
     })
     function sendOrder() {
