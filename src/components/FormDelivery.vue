@@ -131,6 +131,7 @@ export default defineComponent({
     const { order, totalPrice } = toRefs(props)
     tg.onEvent('mainButtonClicked', sendOrder)
     onMounted(() => {
+      tg.onEvent('mainButtonClicked', sendOrder)
       console.log('onMounted')
       tg.MainButton.setParams({
         text: 'Заказать',
