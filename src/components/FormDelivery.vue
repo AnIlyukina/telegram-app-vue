@@ -128,32 +128,34 @@ export default defineComponent({
 
     const v$ = useVuelidate(rules, stateForm)
     const { tg }  = useTelegram()
-    const { order, totalPrice } = toRefs(props)
-    tg.onEvent('mainButtonClicked', sendOrder)
+    // const { order, totalPrice } = toRefs(props)
+    window.Telegram.WebApp.onEvent('mainButtonClicked', sendOrder)
     onMounted(() => {
-      tg.onEvent('mainButtonClicked', sendOrder)
-      console.log('onMounted')
+      window.Telegram.WebApp.onEvent('mainButtonClicked', sendOrder)
       tg.MainButton.setParams({
         text: 'Заказать',
         is_visible: true
       })
+      window.Telegram.WebApp.onEvent('mainButtonClicked', sendOrder)
+      console.log('onMounted')
     })
     function sendOrder() {
       // const result = await this.v$.$validate()
       // if (!result) {
       //   return
       // }
-      // let data = {...stateForm}
+      let data = {...stateForm}
       // data.order = order.value
       // data.price = totalPrice.value
-      // console.log(data, 'отправил')
-      tg.sendData(JSON.stringify({name: 'xsx'}))
+      console.log(data, 'отправил')
+      tg.sendData("ehf")
     }
 
-    // onUnmounted(() => {
-    //   console.log('onUnmounted')
-    //   tg.offEvent('mainButtonClicked', sendOrder)
-    // })
+    onUnmounted(() => {
+      // console.log('onUnmounted')
+      // tg.offEvent('mainButtonClicked', sendOrder)
+      tg.MainButton.hide()
+    })
 
     return {
       stateForm,
