@@ -142,17 +142,17 @@ export default defineComponent({
       // if (!result) {
       //   return
       // }
-      let data = {...stateForm}
+      // let data = {...stateForm}
       // data.order = order.value
       // data.price = totalPrice.value
       // console.log(data, 'отправил')
-      tg.sendData(JSON.stringify(data))
+      tg.sendData(JSON.stringify({name: 'xsx'}))
     }
 
-    onUnmounted(() => {
-      console.log('onUnmounted')
-      tg.offEvent('mainButtonClicked', sendOrder)
-    })
+    // onUnmounted(() => {
+    //   console.log('onUnmounted')
+    //   tg.offEvent('mainButtonClicked', sendOrder)
+    // })
 
     return {
       stateForm,
