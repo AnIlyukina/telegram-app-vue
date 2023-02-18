@@ -1,8 +1,8 @@
 <template>
-  <v-container>
-    <v-row class="text-end">
-       {{ username }}
-    </v-row>
+  <v-container class="text-center header">
+      <h5>
+        {{ username ? username : "Рады видеть вас!" }}
+      </h5>
   </v-container>
 </template>
 
@@ -22,4 +22,11 @@ export default defineComponent({
   }
 })
 </script>
+
+<style lang="scss">
+.header {
+  background: var(--tg-theme-button-color);
+  color: var(--tg-theme-button-text-color);
+}
+</style>
 

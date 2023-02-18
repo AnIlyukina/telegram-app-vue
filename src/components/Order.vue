@@ -9,16 +9,14 @@
       <v-btn
         size="x-small"
         icon="mdi-minus"
-        color="primary"
-        class="ml-2"
+        class="ml-2 order-button"
         @click="decrementCount(product, index)"
       />
       {{ product.count }}
       <v-btn
         size="x-small"
-        icon="mdi-plus"
-        color="primary"
-        class="mr-2"
+        icon="mdi-plus" 
+        class="mr-2 order-button"
         @click="incrementCount(product)"
       />
       - {{ product.count * product.price }}<small>₽</small>
@@ -63,6 +61,9 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
-
+<style lang="scss">
+.order-button{
+  background: var(--tg-theme-button-color);
+  color: var(--tg-theme-button-text-color);
+}
 </style>

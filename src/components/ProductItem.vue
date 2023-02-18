@@ -22,7 +22,8 @@
           v-for="(variant, index) in product.variants"
           :key="index"
           :class="index % 2 !== 0 ? 'mr-0' : 'mr-3 ml-1' "
-          color="indigo"
+          :color="'var(--tg-theme-button-color)'"
+          variant="elevated"
         >
           {{ variant.volume }}мл
         </v-chip>
@@ -105,4 +106,5 @@ export default defineComponent ({
   width: 100%;
   background-color: #ffb8ce;
 }
+
 </style>
