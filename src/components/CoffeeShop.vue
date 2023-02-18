@@ -1,4 +1,10 @@
 <template>
+  <header-menu
+    :step="step"
+    :total-price="totalPrice"
+    @backInCatalog="backInCatalog"
+    @openOrderDetails="openOrderDetails"
+  />
   <product-list
     v-if="step === 'first'"
     :products="products"
@@ -7,11 +13,6 @@
   <order-details
     v-if="step === 'second'"
   >
-    <tg-button
-      @click="backInCatalog"
-    >
-      Назад
-    </tg-button>
     <div v-if="order.length">
       <h4 class="mb-4 mt-2">Ваш заказ?</h4>
       <order-s
@@ -29,7 +30,7 @@
     </div>
     <form-delivery
       :order="order"
-        :total-price="totalPrice"
+      :total-price="totalPrice"
       :payment-type="paymentType"
     />
   </order-details>
@@ -41,10 +42,9 @@ import OrderDetails from "@/components/OrderDetails.vue"
 import { useTelegram } from "@/hooks/useTelegram";
 import FormDelivery from "@/components/FormDelivery";
 import OrderS from "@/components/Order";
+import HeaderMenu from '@/components/HeaderMenu.vue'
 import paymentType from '@/database/paymentType.json'
 import {computed, onMounted, reactive, ref, watchEffect} from "vue";
-
-import TgButton from './TgButton.vue'
 
 export default {
   name: "CoffeeShop",
@@ -53,7 +53,7 @@ export default {
     OrderDetails,
     FormDelivery,
     OrderS,
-    TgButton
+    HeaderMenu
   },
   setup() {
     const products = [
@@ -150,34 +150,11 @@ export default {
         return acc += item.price
       }, 0)
     })
-
-
-    onMounted(()=> {
-      tg.onEvent('mainButtonClicked', openOrderDetails)
-    })
-
-    watchEffect(
-      () => {
-        let message = totalPrice.value ? `В корзину (${totalPrice.value}₽.)` : 'В корзине пусто :('
-        tg.MainButton.setParams({
-          text: message,
-          is_visible: true
-        })
-        if (orderProducts.length) {
-          tg.MainButton.enable()
-        } else {
-          tg.MainButton.disable()
-        }
-      },
-      {
-        flush: 'post'
-      }
-    )
+  
 
     const openOrderDetails = () => {
       if (totalPrice.value) {
         step.value = 'second'
-        tg.offEvent('mainButtonClicked', openOrderDetails)
       }
     }
 
@@ -199,7 +176,6 @@ export default {
 
     const backInCatalog = () => {
       step.value = 'first'
-      tg.onEvent('mainButtonClicked', openOrderDetails)
     }
 
 

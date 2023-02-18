@@ -5,9 +5,9 @@
         v-model="stateForm.city"
         :error-messages="v$.city.$errors.map(e => e.$message)"
         :disabled="!order.length"
+        :color="'var(--tg-theme-button-text-color)'"
         type="input"
         label="Город"
-        color="primary"
         variant="outlined"
         clearable
         required
@@ -19,11 +19,11 @@
         v-model="stateForm.address"
         :error-messages="v$.address.$errors.map(e => e.$message)"
         :disabled="!order.length"
+        :color="'var(--tg-theme-button-text-color)'"
         clearable
         type="input"
         label="Адрес"
         required
-        color="primary"
         variant="outlined"
         density="compact"
       />
@@ -36,11 +36,11 @@
           v-model="stateForm.intercom"
           :error-messages="v$.intercom.$errors.map(e => e.$message)"
           :disabled="!order.length"
+          :color="'var(--tg-theme-button-text-color)'"
           clearable
           type="input"
           label="Домофон"
           required
-          color="primary"
           variant="outlined"
           density="compact"
         />
@@ -51,11 +51,11 @@
           v-model="stateForm.floor"
           :error-messages="v$.floor.$errors.map(e => e.$message)"
           :disabled="!order.length"
+          :color="'var(--tg-theme-button-text-color)'"
           clearable
           type="input"
           label="Этаж"
           required
-          color="primary"
           variant="outlined"
           density="compact"
         />
@@ -66,14 +66,19 @@
       :error-messages="v$.paymentSelected.$errors.map(e => e.$message)"
       :items="paymentType"
       :disabled="!order.length"
+      :color="'var(--tg-theme-button-text-color)'"
       label="Способ оплаты"
       item-title="type"
       item-value="value"
-      color="primary"
       variant="outlined"
       density="compact"
       required
     />
+    <button
+      @click.prevent="sendOrder"
+    >
+      Проверка связи
+    </button>
   </v-form>
 </template>
 
@@ -151,7 +156,8 @@ export default defineComponent({
 
     return {
       stateForm,
-      v$
+      v$,
+      sendOrder
     }
   }
 })
