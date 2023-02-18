@@ -78,9 +78,10 @@
 </template>
 
 <script>
-import {defineComponent, reactive} from "vue";
+import {defineComponent, onMounted, reactive, toRefs, onUnmounted} from "vue";
 import { helpers, required } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
+import { useTelegram } from '@/hooks/useTelegram'
 export default defineComponent({
   name: "FormDelivery",
   props: {
@@ -91,9 +92,13 @@ export default defineComponent({
     order: {
       type:  Array,
       default: () => []
+    },
+    totalPrice: {
+      type: Number,
+      default: 0
     }
   },
-  setup () {
+  setup (props) {
     const initialStateFrom = {
       city: '',
       address: '',
@@ -117,6 +122,32 @@ export default defineComponent({
     }
 
     const v$ = useVuelidate(rules, stateForm)
+    const { tg }  = useTelegram()
+    const { order, totalPrice } = toRefs(props)
+    onMounted(() => {
+      console.log('onMounted')
+      tg.onEvent('mainButtonClicked', sendOrder)
+      tg.MainButton.setParams({
+        text: 'Заказать',
+        is_visible: true
+      })
+    })
+    async function sendOrder() {
+      const result = await this.v$.$validate()
+      if (!result) {
+        return
+      }
+      let data = {...stateForm}
+      data.order = order.value
+      data.price = totalPrice.value
+      console.log(data, 'отправил')
+      tg.sendData(JSON.stringify(data))
+    }
+
+    onUnmounted(() => {
+      console.log('onUnmounted')
+      tg.offEvent('mainButtonClicked', sendOrder)
+    })
 
     return {
       stateForm,

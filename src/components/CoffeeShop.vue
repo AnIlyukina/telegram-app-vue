@@ -3,23 +3,12 @@
     v-if="step === 'first'"
     :products="products"
     @add-in-order="addInOrder"
-  >
-    <tg-button
-      @click="openOrderDetails"
-    >
-    <span v-if="totalPrice">
-      В корзину ({{totalPrice}} ₽.)
-    </span>
-      <span v-else>
-      В корзине пусто :(
-    </span>
-    </tg-button>
-  </product-list>
+  />
   <order-details
     v-if="step === 'second'"
   >
     <tg-button
-      @click="step = 'first'"
+      @click="backInCatalog"
     >
       Назад
     </tg-button>
@@ -40,6 +29,7 @@
     </div>
     <form-delivery
       :order="order"
+        :total-price="totalPrice"
       :payment-type="paymentType"
     />
   </order-details>
@@ -207,6 +197,11 @@ export default {
       }
     }
 
+    const backInCatalog = () => {
+      step.value = 'first'
+      tg.onEvent('mainButtonClicked', openOrderDetails)
+    }
+
 
     return {
       products,
@@ -216,6 +211,7 @@ export default {
       addInOrder,
       order,
       step,
+      backInCatalog,
       openOrderDetails,
       changeOrder
     }
