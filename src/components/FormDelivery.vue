@@ -129,9 +129,9 @@ export default defineComponent({
     const v$ = useVuelidate(rules, stateForm)
     const { tg }  = useTelegram()
     const { order, totalPrice } = toRefs(props)
+    tg.onEvent('mainButtonClicked', sendOrder)
     onMounted(() => {
       console.log('onMounted')
-      tg.onEvent('mainButtonClicked', sendOrder)
       tg.MainButton.setParams({
         text: 'Заказать',
         is_visible: true
