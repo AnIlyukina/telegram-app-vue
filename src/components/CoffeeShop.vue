@@ -5,35 +5,35 @@
     @backInCatalog="backInCatalog"
     @openOrderDetails="openOrderDetails"
   />
-  <product-list
-    v-if="step === 'first'"
-    :products="products"
-    @add-in-order="addInOrder"
-  />
-  <order-details
-    v-if="step === 'second'"
-  >
-    <div v-if="order.length">
-      <h4 class="mb-4 mt-2">Ваш заказ?</h4>
-      <order-s
+    <product-list
+      v-if="step === 'first'"
+      :products="products"
+      @add-in-order="addInOrder"
+    />
+    <order-details
+      v-if="step === 'second'"
+    >
+      <div v-if="order.length">
+        <h4 class="mb-4 mt-2">Ваш заказ?</h4>
+        <order-s
+          :order="order"
+          :total-price="totalPrice"
+          @changeOrder="changeOrder"
+        />
+        <h4 class="mb-4">Куда везем?</h4>
+      </div>
+      <div
+        v-else
+        class="text-center mt-4"
+      >
+        Корзина пуста, выбери товар и возврашайся
+      </div>
+      <form-delivery
         :order="order"
         :total-price="totalPrice"
-        @changeOrder="changeOrder"
+        :payment-type="paymentType"
       />
-      <h4 class="mb-4">Куда везем?</h4>
-    </div>
-    <div
-      v-else
-      class="text-center mt-4"
-    >
-      Корзина пуста, выбери товар и возврашайся
-    </div>
-    <form-delivery
-      :order="order"
-      :total-price="totalPrice"
-      :payment-type="paymentType"
-    />
-  </order-details>
+    </order-details>
 </template>
 
 <script>

@@ -5,7 +5,7 @@
         v-model="stateForm.city"
         :error-messages="v$.city.$errors.map(e => e.$message)"
         :disabled="!order.length"
-        :color="'var(--tg-theme-button-text-color)'"
+        :color="'var(--tg-theme-button-color)'"
         type="input"
         label="Город"
         variant="outlined"
@@ -19,7 +19,7 @@
         v-model="stateForm.address"
         :error-messages="v$.address.$errors.map(e => e.$message)"
         :disabled="!order.length"
-        :color="'var(--tg-theme-button-text-color)'"
+        :color="'var(--tg-theme-button-color)'"
         clearable
         type="input"
         label="Адрес"
@@ -36,7 +36,7 @@
           v-model="stateForm.intercom"
           :error-messages="v$.intercom.$errors.map(e => e.$message)"
           :disabled="!order.length"
-          :color="'var(--tg-theme-button-text-color)'"
+           :color="'var(--tg-theme-button-color)'"
           clearable
           type="input"
           label="Домофон"
@@ -51,7 +51,7 @@
           v-model="stateForm.floor"
           :error-messages="v$.floor.$errors.map(e => e.$message)"
           :disabled="!order.length"
-          :color="'var(--tg-theme-button-text-color)'"
+          :color="'var(--tg-theme-button-color)'"
           clearable
           type="input"
           label="Этаж"
@@ -66,7 +66,7 @@
       :error-messages="v$.paymentSelected.$errors.map(e => e.$message)"
       :items="paymentType"
       :disabled="!order.length"
-      :color="'var(--tg-theme-button-text-color)'"
+      :color="'var(--tg-theme-button-color)'"
       label="Способ оплаты"
       item-title="type"
       item-value="value"
@@ -137,15 +137,15 @@ export default defineComponent({
         is_visible: true
       })
     })
-    async function sendOrder() {
-      const result = await this.v$.$validate()
-      if (!result) {
-        return
-      }
+    function sendOrder() {
+      // const result = await this.v$.$validate()
+      // if (!result) {
+      //   return
+      // }
       let data = {...stateForm}
-      data.order = order.value
-      data.price = totalPrice.value
-      console.log(data, 'отправил')
+      // data.order = order.value
+      // data.price = totalPrice.value
+      // console.log(data, 'отправил')
       tg.sendData(JSON.stringify(data))
     }
 

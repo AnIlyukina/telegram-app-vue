@@ -1,8 +1,9 @@
 <template>
-  <v-container class="justify-space-between d-flex header-menu  ">
+  <v-container
+    :class="[step === 'second' ? 'order' : '', 'justify-space-between d-flex header-menu']">
     <div class="d-flex align-center">
       <h5>
-        {{ username ? username : "Рады видеть вас!" }}
+        {{ username ? username : "Взбодрись" }}
       </h5>
     </div>
     <div>
@@ -73,8 +74,14 @@ export default defineComponent({
 
 <style lang="scss">
 .header-menu {
+  position: fixed;
   background: var(--tg-theme-button-color);
   color: var(--tg-theme-button-text-color);
+  z-index: 2;
+
+  &.order{
+    position: relative;
+  }
 
   &__basket{
     position: relative;
