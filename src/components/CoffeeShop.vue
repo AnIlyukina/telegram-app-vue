@@ -1,6 +1,8 @@
 <template>
   <header-menu
+    v-model="selectedPosition"
     :step="step"
+    :menu="menu"
     :total-price="totalPrice"
     @backInCatalog="backInCatalog"
     @openOrderDetails="openOrderDetails"
@@ -37,14 +39,20 @@
 </template>
 
 <script>
+// то что нужно получать с бекенда
+import paymentType from '@/database/paymentType.json'
+import groups from '@/database/groups.json'
+import allProducts from '@/database/products'
+
+import { useTelegram } from "@/hooks/useTelegram";
+
 import ProductList from "@/components/ProductList.vue";
 import OrderDetails from "@/components/OrderDetails.vue"
-import { useTelegram } from "@/hooks/useTelegram";
 import FormDelivery from "@/components/FormDelivery";
 import OrderS from "@/components/Order";
 import HeaderMenu from '@/components/HeaderMenu.vue'
-import paymentType from '@/database/paymentType.json'
-import {computed, onMounted, reactive, ref, watchEffect} from "vue";
+import Products from '@/models/Products'
+import {computed, reactive, ref} from "vue";
 
 export default {
   name: "CoffeeShop",
@@ -56,72 +64,23 @@ export default {
     HeaderMenu
   },
   setup() {
-    const products = [
-      {
-        id: 1,
-        name: 'Капучино',
-        variants: [
-          {id: 1, volume: 200, price: 100},
-          {id: 2, volume: 250, price: 150},
-          {id: 3, volume: 300, price: 200},
-          {id: 4, volume: 350, price: 250},
-        ]
-      },
-      { id: 2,
-        name: 'Латте',
-        variants: [
-          {id: 1, volume: 200, price: 100},
-          {id: 2, volume: 250, price: 150},
-          {id: 3, volume: 300, price: 200},
-          {id: 4, volume: 350, price: 250},
-        ]
-      },
-      {
-        id: 3,
-        name: 'Флэт Уайт',
-        variants: [
-          {id: 1, volume: 200, price: 100},
-          {id: 2, volume: 250, price: 150},
-          {id: 3, volume: 300, price: 200},
-          {id: 4, volume: 350, price: 250},
-        ],
-      },
-      {
-        id: 4,
-        name: 'Раф кофе',
-        variants: [
-          {id: 1, volume: 200, price: 100},
-          {id: 2, volume: 250, price: 150},
-          {id: 3, volume: 300, price: 200},
-          {id: 4, volume: 350, price: 250},
-        ],
-      },
-      {
-        id: 5,
-        name: 'Мокко',
-        variants: [
-          {id: 1, volume: 200, price: 100},
-          {id: 2, volume: 250, price: 150},
-          {id: 3, volume: 300, price: 200},
-          {id: 4, volume: 350, price: 250},
-        ],
-      },
-      {
-        id: 6,
-        name: 'Гляссе',
-        variants: [
-          {id: 1, volume: 200, price: 100},
-          {id: 2, volume: 250, price: 150},
-          {id: 3, volume: 300, price: 200},
-          {id: 4, volume: 350, price: 250},
-        ],
-        toppingGroups: [1,2,3]
-      },
-    ]
+  
     const { tg }  = useTelegram()
     // приложение проинициализировалось
     tg.ready()
+
     let step = ref('first')
+    let selectedPosition = ref(1)
+
+    const { menu } = Products.setData({groups, allProducts})
+    console.log(menu, 'menu')
+    const products = computed(() => {
+      return menu.filter(item => item.groupId === selectedPosition.value)[0].products
+    })
+
+    console.log(products.value)
+
+
     let orderProducts = reactive([])
     const addInOrder = (product) => {
       orderProducts.push(product)
@@ -189,7 +148,9 @@ export default {
       step,
       backInCatalog,
       openOrderDetails,
-      changeOrder
+      changeOrder,
+      selectedPosition,
+      menu
     }
   }
 }

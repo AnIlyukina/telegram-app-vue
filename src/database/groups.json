@@ -10,5 +10,11 @@
     "name": "Сиропы",
     "parent": 1,
     "showInCatalog": true
+  },
+  {
+    "id": 3,
+    "name": "Милкшейки",
+    "parent": 0,
+    "showInCatalog": true
   }
 ]

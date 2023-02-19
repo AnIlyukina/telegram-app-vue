@@ -1,7 +1,5 @@
 <template>
-  <v-card
-    max-width="160"
-  >
+  <v-card>
     <v-img
       height="100"
       cover
@@ -32,7 +30,7 @@
 
     <v-card-text class="d-flex justify-space-between pt-1">
       <p class="d-flex justify-center align-center w-50">
-        Цена: {{ price }} ₽.
+        Цена: {{ price }}&nbsp;₽.
       </p>
       <v-card-actions class="pl-0 pr-0 pb-0 pt-0">
         <tg-button

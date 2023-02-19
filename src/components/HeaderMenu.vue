@@ -1,9 +1,21 @@
 <template>
   <v-container
     :class="[step === 'second' ? 'order' : '', 'justify-space-between d-flex header-menu']">
+    <div>
+      <v-select
+        :model-value="modelValue"
+        :items="menu"
+        :hide-details="true"
+        variant="outlined"
+        density="compact"
+        item-title="name"
+        item-value="groupId"
+        @update:modelValue="updateValue"
+      />
+    </div>
     <div class="d-flex align-center">
       <h5>
-        {{ username ? username : "Взбодрись" }}
+        {{ username ? username : "Закажи домой" }}
       </h5>
     </div>
     <div>
@@ -35,7 +47,7 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent, toRefs } from 'vue';
 import { useTelegram } from '@/hooks/useTelegram.js'
 
 export default defineComponent({
@@ -48,12 +60,17 @@ export default defineComponent({
     totalPrice: {
       type: Number,
       default: 0
-    }
+    },
+    menu: {
+      type: Array,
+      default: () => []
+    },
+    // eslint-disable-next-line vue/require-prop-type-constructor
+    modelValue: "",
   },
-  emits: ['openOrderDetails', 'backInCatalog'],
+  emits: ['openOrderDetails', 'backInCatalog', 'update:modelValue'],
   setup(props, {emit}) {
     const { username } = useTelegram()
-
     const openOrderDetails = () => {
       emit('openOrderDetails')
     }
@@ -61,11 +78,16 @@ export default defineComponent({
      const backInCatalog = () => {
       emit('backInCatalog')
     }
+
+    const updateValue = (target) => {
+      emit('update:modelValue', target);
+    }
  
     return {
       username,
       openOrderDetails,
-      backInCatalog
+      backInCatalog,
+      updateValue
     }
 
   }

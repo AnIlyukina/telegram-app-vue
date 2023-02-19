@@ -1,18 +1,25 @@
 <template>
-  <v-container class="pt-15">
-    <slot/>
-    <ul class="list mt-4">
-      <li
+  <v-container class="pt-16">
+    <v-row
+      v-if="products.length"
+    >
+      <v-col
         v-for="product in products"
         :key="product.id"
-        class="mr-2 mb-2"
+        cols="6"
+        sm="3"
       >
         <product-item
           :product="product"
           @add-in-order="addInOrder"
         />
-      </li>
-    </ul>
+      </v-col>
+    </v-row>
+    <div
+      v-else
+    >
+      Приносим свои извинения, меню не сформировано
+  </div>
   </v-container>
 </template>
 
@@ -45,16 +52,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style>
-.list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  list-style-type: none;
-}
-.item {
-  margin-right: 10px;
-  margin-bottom: 10px;
-}
-</style>

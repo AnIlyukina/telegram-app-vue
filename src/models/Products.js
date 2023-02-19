@@ -1,17 +1,29 @@
 export default class Products {
     static setData({ groups, allProducts}) {
 
-        let productList = []
-        let groupsId = []
+        let menu = [];
+        let groupsForCatalog = []
+      
+        // собираю id и имя групп товаров для каталога
+        groupsForCatalog = groups.filter(group => !group.parent && group.showInCatalog)
 
-        groupsId = groups.filter(group => !group.parent && group.showInCatalog)
-
-        productList = allProducts.filter(product => product.id === groupsId[0].id)
-        console.log(groupsId, 'groupsId')
+        menu = groupsForCatalog.map((group) => {
+          let data = {
+            groupId: group.id,
+            name: group.name,
+            products: [],
+          };
+          allProducts.forEach((product) => {
+            if (product.groupId === group.id) {
+              data.products.push(product);
+            }
+          });
+          return data;
+        });
 
 
         return {
-           productList
-        }
+          menu,
+        };
     }
 }
