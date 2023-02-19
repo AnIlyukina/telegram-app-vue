@@ -20,6 +20,6 @@ export function useTelegram () {
     onToggleButton,
     onClose,
     username,
-     queryId
+    queryId
  };
 }

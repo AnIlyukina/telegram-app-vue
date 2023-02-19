@@ -127,41 +127,40 @@ export default defineComponent({
     }
 
     const v$ = useVuelidate(rules, stateForm)
-    const { tg }  = useTelegram()
-    // const { order, totalPrice } = toRefs(props)
-    window.Telegram.WebApp.onEvent('mainButtonClicked', function sendOrder() {
-      // const result = await this.v$.$validate()
-      // if (!result) {
-      //   return
-      // }
-      let data = {...stateForm}
-      // data.order = order.value
-      // data.price = totalPrice.value
-      console.log(data, 'отправил')
-      tg.sendData("ehf")
-    })
+    const { tg, queryId }  = useTelegram()
+    const { order, totalPrice } = toRefs(props)
+    
     onMounted(() => {
+      tg.onEvent('mainButtonClicked', sendOrder)
       tg.MainButton.setParams({
         text: 'Заказать',
         is_visible: true
       })
-      console.log('onMounted')
     })
-    function sendOrder() {
-      // const result = await this.v$.$validate()
-      // if (!result) {
-      //   return
-      // }
-      let data = {...stateForm}
-      // data.order = order.value
-      // data.price = totalPrice.value
-      console.log(data, 'отправил')
-      tg.sendData("ehf")
+    async function sendOrder() {
+      const result = await this.v$.$validate()
+      if (!result) {
+        return
+      }
+      const data = {
+        userInfo: stateForm,
+        order: order.value,
+        price: totalPrice.value,
+        queryId
+      }
+      
+      fetch('http://localhost:8000/web-data', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
     }
 
     onUnmounted(() => {
-      // console.log('onUnmounted')
-      // tg.offEvent('mainButtonClicked', sendOrder)
+      console.log('onUnmounted')
+      tg.offEvent('mainButtonClicked', sendOrder)
       tg.MainButton.hide()
     })
 
