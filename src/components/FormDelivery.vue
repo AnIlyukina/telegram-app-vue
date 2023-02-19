@@ -144,11 +144,10 @@ export default defineComponent({
       }
       const data = {
         userInfo: stateForm,
-        order: order.value,
         price: totalPrice.value,
-        queryId
+        queryId: queryId
       }
-      
+      console.log(JSON.stringify(data), queryId)
       fetch('http://localhost:8000/web-data', {
         method: 'POST',
         headers: {
