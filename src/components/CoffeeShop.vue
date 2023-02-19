@@ -78,8 +78,6 @@ export default {
       return menu.filter(item => item.groupId === selectedPosition.value)[0].products
     })
 
-    console.log(products.value)
-
 
     let orderProducts = reactive([])
     const addInOrder = (product) => {

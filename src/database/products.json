@@ -3,7 +3,7 @@
     "id": 1,
     "name": "Капучино",
     "groupId": 1,
-    "relatedProduct": [1,2,3],
+    "relatedProduct": [2],
     "variants": [
       { "volume": 200, "price": 100 },
       { "volume": 250, "price": 150 },
@@ -15,7 +15,7 @@
     "id": 2,
     "name": "Латте",
     "groupId": 1,
-    "relatedProduct": [1,2,3],
+    "relatedProduct": [2],
     "variants": [
       { "volume": 200, "price": 100 },
       { "volume": 250, "price": 150 },
@@ -27,7 +27,7 @@
     "id": 3,
     "name": "Флэт Уайт",
     "groupId": 1,
-    "relatedProduct": [1,2,3],
+    "relatedProduct": [2],
     "variants": [
       { "volume": 200, "price": 100 },
       { "volume": 250, "price": 150 },
@@ -40,7 +40,7 @@
     "name": "Раф кофе",
     "price": 300,
     "groupId": 1,
-    "relatedProduct": [1,2,3],
+    "relatedProduct": [2],
     "variants": [
       { "volume": 200, "price": 100 },
       { "volume": 250, "price": 150 },
@@ -52,7 +52,7 @@
     "id": 5,
     "name": "Мокко",
     "groupId": 1,
-    "relatedProduct": [1,2,3],
+    "relatedProduct": [2],
     "variants": [
       { "volume": 200, "price": 100},
       { "volume": 250, "price": 150},
@@ -64,7 +64,7 @@
     "id": 6,
     "name": "Гляссе",
     "groupId": 1,
-    "relatedProduct": [1,2,3],
+    "relatedProduct": [2],
     "variants": [
       { "volume": 200, "price": 100},
       { "volume": 250, "price": 150},

@@ -128,7 +128,9 @@ export default defineComponent({
 
     const v$ = useVuelidate(rules, stateForm)
     const { tg, queryId }  = useTelegram()
-    const { order, totalPrice } = toRefs(props)
+    const { 
+      // order,
+      totalPrice } = toRefs(props)
     
     onMounted(() => {
       tg.onEvent('mainButtonClicked', sendOrder)

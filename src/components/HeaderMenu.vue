@@ -1,7 +1,8 @@
 <template>
   <v-container
-    :class="[step === 'second' ? 'order' : '', 'justify-space-between d-flex header-menu']">
-    <div>
+    :class="[step === 'second' ? 'order' : '', 'justify-space-between d-flex header-menu pt-2 pb-1']">
+    <div 
+      v-if="step === 'first'">
       <v-select
         :model-value="modelValue"
         :items="menu"
@@ -47,7 +48,7 @@
 </template>
 
 <script>
-import { defineComponent, toRefs } from 'vue';
+import { defineComponent } from 'vue';
 import { useTelegram } from '@/hooks/useTelegram.js'
 
 export default defineComponent({

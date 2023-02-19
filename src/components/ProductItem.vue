@@ -5,7 +5,7 @@
       cover
       src="https://www.smilegifts.ru/image/cache/catalog/img/Sim-0519/termostakan-kofe/02-800x800.jpg"
     ></v-img>
-    <v-card-title class="py-0">{{ product.name }}</v-card-title>
+    <v-card-title class="py-0 text-center">{{ product.name }}</v-card-title>
     <v-divider class="my-0"></v-divider>
     <v-card-text
       class="pt-1 pl-1 pr-1 pb-1"
@@ -26,6 +26,24 @@
           {{ variant.volume }}мл
         </v-chip>
       </v-chip-group>
+    </v-card-text>
+    <v-card-text class="pt-1 pl-1 pr-1 pb-1">
+      <v-carousel
+        v-model="syrup"
+        :continuous="false"
+        :show-arrows="false"
+        hide-delimiters
+        height="32">
+          <v-carousel-item
+            v-for="(item,index) in product.relatedProduct[0].products"
+            class="text-center d-flex align-center tg-color"
+            :key="index"
+          >
+          <span>
+            {{item.name }}
+          </span>
+          </v-carousel-item>
+        </v-carousel>
     </v-card-text>
 
     <v-card-text class="d-flex justify-space-between pt-1">
@@ -61,6 +79,7 @@ export default defineComponent ({
   emits: ['addInOrder'],
   setup(props, { emit }){
     const { product } = toRefs(props)
+    let syrup = ref('')
     const addInBasket = () => {
       let selected = {
         id: product.value.id,
@@ -80,7 +99,8 @@ export default defineComponent ({
     return {
       addInBasket,
       price,
-      selectedVolume
+      selectedVolume,
+      syrup
     }
   }
 
@@ -103,6 +123,11 @@ export default defineComponent ({
 .add-btn {
   width: 100%;
   background-color: #ffb8ce;
+}
+
+.tg-color{
+  background: var(--tg-theme-button-color);
+  color: var(--tg-theme-button-text-color);
 }
 
 </style>
