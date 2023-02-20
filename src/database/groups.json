@@ -16,5 +16,11 @@
     "name": "Милкшейки",
     "parent": 0,
     "showInCatalog": true
+  },
+  {
+    "id": 4,
+    "name": "Выпечка",
+    "parent": 0,
+    "showInCatalog": true
   }
 ]

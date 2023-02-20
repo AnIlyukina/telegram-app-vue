@@ -1,41 +1,45 @@
 <template>
-  <header-menu
-    v-model="selectedPosition"
-    :step="step"
-    :menu="menu"
-    :total-price="totalPrice"
-    @backInCatalog="backInCatalog"
-    @openOrderDetails="openOrderDetails"
-  />
-    <product-list
-      v-if="step === 'first'"
-      :products="products"
-      @add-in-order="addInOrder"
+  <v-layout>
+    <header-menu
+      v-model="selectedPosition"
+      :step="step"
+      :menu="menu"
+      :total-price="totalPrice"
+      @backInCatalog="backInCatalog"
+      @openOrderDetails="openOrderDetails"
     />
-    <order-details
-      v-if="step === 'second'"
-    >
-      <div v-if="order.length">
-        <h4 class="mb-4 mt-2">Ваш заказ?</h4>
-        <order-s
+    <v-main>
+      <product-list
+        v-if="step === 'first'"
+        :products="products"
+        @add-in-order="addInOrder"
+      />
+      <order-details
+        v-if="step === 'second'"
+      >
+        <div v-if="order.length">
+          <h4 class="mb-4 mt-2">Ваш заказ?</h4>
+          <order-s
+            :order="order"
+            :total-price="totalPrice"
+            @changeOrder="changeOrder"
+          />
+          <h4 class="mb-4">Куда везем?</h4>
+        </div>
+        <div
+          v-else
+          class="text-center mt-4"
+        >
+          Корзина пуста, выбери товар и возврашайся
+        </div>
+        <form-delivery
           :order="order"
           :total-price="totalPrice"
-          @changeOrder="changeOrder"
+          :payment-type="paymentType"
         />
-        <h4 class="mb-4">Куда везем?</h4>
-      </div>
-      <div
-        v-else
-        class="text-center mt-4"
-      >
-        Корзина пуста, выбери товар и возврашайся
-      </div>
-      <form-delivery
-        :order="order"
-        :total-price="totalPrice"
-        :payment-type="paymentType"
-      />
-    </order-details>
+      </order-details>
+    </v-main>
+  </v-layout>
 </template>
 
 <script>
@@ -64,7 +68,7 @@ export default {
     HeaderMenu
   },
   setup() {
-  
+
     const { tg }  = useTelegram()
     // приложение проинициализировалось
     tg.ready()
@@ -107,7 +111,7 @@ export default {
         return acc += item.price
       }, 0)
     })
-  
+
 
     const openOrderDetails = () => {
       if (totalPrice.value) {

@@ -1,26 +1,15 @@
 <template>
-  <v-container
-    :class="[step === 'second' ? 'order' : '', 'justify-space-between d-flex header-menu pt-2 pb-1']">
-    <div 
-      v-if="step === 'first'">
-      <v-select
-        :model-value="modelValue"
-        :items="menu"
-        :hide-details="true"
-        variant="outlined"
-        density="compact"
-        item-title="name"
-        item-value="groupId"
-        @update:modelValue="updateValue"
-      />
-    </div>
-    <div class="d-flex align-center">
-      <h5>
-        {{ username ? username : "Закажи домой" }}
-      </h5>
-    </div>
-    <div>
-      <div 
+  <v-app-bar
+    :color="'var(--tg-theme-button-color)'"
+    :class="[step === 'first' ? 'position-fixed' : '']"
+  >
+    <v-app-bar-nav-icon
+      v-if="step === 'first'"
+      variant="text"
+      @click.stop="drawer = !drawer"/>
+    <v-spacer></v-spacer>
+    <div class="mr-3">
+      <div
         v-if="step === 'first'"
         class="header-menu__basket"
         @click="openOrderDetails"
@@ -44,11 +33,36 @@
         />
       </div>
     </div>
-  </v-container>
+  </v-app-bar>
+  <v-navigation-drawer
+    :class="[step === 'first' ? 'position-fixed' : '']"
+    v-model="drawer"
+    temporary
+  >
+    <v-list-item
+      prepend-avatar="https://avatars.mds.yandex.net/i?id=2bf8c047d61a77491675e765c2a8f65d284a93db-8186070-images-thumbs&n=13"
+      :title="username ? username : 'Привет, Котик!'"
+    ></v-list-item>
+
+    <v-divider></v-divider>
+
+    <v-list
+      density="compact"
+      nav>
+        <v-list-item
+          v-for="(position, index) in menu"
+          :key="index"
+          prepend-icon="mdi-thumb-up"
+          :title="position.name"
+          :value="position.groupId"
+          @click="updateValue(position.groupId)"
+        />
+    </v-list>
+  </v-navigation-drawer>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { useTelegram } from '@/hooks/useTelegram.js'
 
 export default defineComponent({
@@ -72,8 +86,12 @@ export default defineComponent({
   emits: ['openOrderDetails', 'backInCatalog', 'update:modelValue'],
   setup(props, {emit}) {
     const { username } = useTelegram()
+
+    let drawer = ref(false)
     const openOrderDetails = () => {
-      emit('openOrderDetails')
+      if (!drawer.value) {
+        emit('openOrderDetails')
+      }
     }
 
      const backInCatalog = () => {
@@ -82,13 +100,15 @@ export default defineComponent({
 
     const updateValue = (target) => {
       emit('update:modelValue', target);
+      drawer.value = false
     }
- 
+
     return {
       username,
       openOrderDetails,
       backInCatalog,
-      updateValue
+      updateValue,
+      drawer
     }
 
   }
@@ -98,8 +118,6 @@ export default defineComponent({
 <style lang="scss">
 .header-menu {
   position: fixed;
-  background: var(--tg-theme-button-color);
-  color: var(--tg-theme-button-text-color);
   z-index: 2;
 
   &.order{

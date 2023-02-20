@@ -1,5 +1,5 @@
 <template>
-  <v-container class="pt-16">
+  <v-container>
     <v-row
       v-if="products.length"
     >
