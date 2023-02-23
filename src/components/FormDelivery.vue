@@ -133,7 +133,7 @@ export default defineComponent({
       totalPrice } = toRefs(props)
     
     onMounted(() => {
-      tg.onEvent('mainButtonClicked', sendOrder)
+      tg.onEvent('mainButtonClicked', async () => await sendOrder())
       tg.MainButton.setParams({
         text: 'Заказать',
         is_visible: true
