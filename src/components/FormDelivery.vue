@@ -140,6 +140,9 @@ export default defineComponent({
       })
     })
    function sendOrder() {
+      if (this.v$.$invalid) {
+        return
+      }
       // const result = await this.v$.$validate()
       // if (!result) {
       //   return
