@@ -139,18 +139,18 @@ export default defineComponent({
         is_visible: true
       })
     })
-    async function sendOrder() {
-      const result = await this.v$.$validate()
-      if (!result) {
-        return
-      }
+    function sendOrder() {
+      // const result = await this.v$.$validate()
+      // if (!result) {
+      //   return
+      // }
       const data = {
         userInfo: stateForm,
         price: totalPrice.value,
         queryId: queryId
       }
       console.log(JSON.stringify(data), queryId)
-      fetch('http://localhost:8000/web-data', {
+      fetch('https://0722-185-37-59-81.eu.ngrok.io/web-data', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
