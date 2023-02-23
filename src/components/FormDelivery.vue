@@ -131,19 +131,19 @@ export default defineComponent({
     const { 
       // order,
       totalPrice } = toRefs(props)
-    
+    tg.onEvent('mainButtonClicked', sendOrder)
     onMounted(() => {
-      tg.onEvent('mainButtonClicked', async () => await sendOrder())
+      tg.onEvent('mainButtonClicked', sendOrder)
       tg.MainButton.setParams({
         text: 'Заказать',
         is_visible: true
       })
     })
-    async function sendOrder() {
-      const result = await this.v$.$validate()
-      if (!result) {
-        return
-      }
+   function sendOrder() {
+      // const result = await this.v$.$validate()
+      // if (!result) {
+      //   return
+      // }
       const data = {
         userInfo: stateForm,
         price: totalPrice.value,
