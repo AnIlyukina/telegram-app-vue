@@ -6,6 +6,7 @@
     <v-app-bar-nav-icon
       v-if="step === 'first'"
       variant="text"
+      :color="'var(--tg-theme-button-text-color)'"
       @click.stop="drawer = !drawer"/>
     <v-spacer></v-spacer>
     <div class="mr-3">
@@ -38,14 +39,8 @@
     :class="[step === 'first' ? 'position-fixed' : '']"
     v-model="drawer"
     temporary
+    location="top"
   >
-    <v-list-item
-      prepend-avatar="https://avatars.mds.yandex.net/i?id=2bf8c047d61a77491675e765c2a8f65d284a93db-8186070-images-thumbs&n=13"
-      :title="username ? username : 'Привет, Котик!'"
-    ></v-list-item>
-
-    <v-divider></v-divider>
-
     <v-list
       density="compact"
       nav>
@@ -130,7 +125,7 @@ export default defineComponent({
   }
   &__price{
     position: absolute;
-    // color: var(--tg-theme-button-text-color);
+    color: var(--tg-theme-button-text-color);
     right: 25px;
     bottom: 10px;
   }

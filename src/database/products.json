@@ -2,6 +2,7 @@
   {
     "id": 1,
     "name": "Капучино",
+    "image": "https://bipbap.ru/wp-content/uploads/2020/01/3-1.png",
     "groupId": 1,
     "relatedProduct": [2],
     "variants": [
@@ -14,6 +15,7 @@
   {
     "id": 2,
     "name": "Латте",
+    "image": "https://bipbap.ru/wp-content/uploads/2020/01/3-1.png",
     "groupId": 1,
     "relatedProduct": [2],
     "variants": [
@@ -26,6 +28,7 @@
   {
     "id": 3,
     "name": "Флэт Уайт",
+    "image": "https://bipbap.ru/wp-content/uploads/2020/01/3-1.png",
     "groupId": 1,
     "relatedProduct": [2],
     "variants": [
@@ -38,6 +41,7 @@
   {
     "id": 4,
     "name": "Раф кофе",
+    "image": "https://bipbap.ru/wp-content/uploads/2020/01/3-1.png",
     "price": 300,
     "groupId": 1,
     "relatedProduct": [2],
@@ -51,6 +55,7 @@
   {
     "id": 5,
     "name": "Мокко",
+    "image": "https://bipbap.ru/wp-content/uploads/2020/01/3-1.png",
     "groupId": 1,
     "relatedProduct": [2],
     "variants": [
@@ -63,6 +68,7 @@
   {
     "id": 6,
     "name": "Гляссе",
+    "image": "https://bipbap.ru/wp-content/uploads/2020/01/3-1.png",
     "groupId": 1,
     "relatedProduct": [2],
     "variants": [
@@ -106,6 +112,39 @@
     "relatedProduct": [],
     "variants": [
       { "volume": 30, "price": 30}
+    ]
+  },
+  {
+    "id": 20,
+    "name": "Ванильный",
+    "image": "https://img.freepik.com/premium-vector/realistic-vanilla-milkshake-in-glass-with-straws-sweet-cold-tasty-summer-beverages-cocktail_341509-4034.jpg",
+    "groupId": 3,
+    "relatedProduct": [],
+    "variants": [
+      { "volume": 300, "price": 200 },
+      { "volume": 350, "price": 250 }
+    ]
+  },
+  {
+    "id": 21,
+    "name": "Клубничный",
+    "image": "data:image/jpeg;base64,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",
+    "groupId": 3,
+    "relatedProduct": [],
+    "variants": [
+      { "volume": 300, "price": 200 },
+      { "volume": 350, "price": 250 }
+    ]
+  },
+  {
+    "id": 21,
+    "name": "Шоколадный",
+    "image": "https://w7.pngwing.com/pngs/888/923/png-transparent-milkshake-chocolate-milk-cream-cartoon-creative-hand-painted-glass-watercolor-painting-glass-wine-glass.png",
+    "groupId": 3,
+    "relatedProduct": [],
+    "variants": [
+      { "volume": 300, "price": 200 },
+      { "volume": 350, "price": 250 }
     ]
   }
 ]

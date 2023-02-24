@@ -140,6 +140,7 @@ export default defineComponent({
       })
     })
    function sendOrder() {
+     console.log('dsd')
       if (this.v$.$invalid) {
         return
       }
