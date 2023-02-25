@@ -26,24 +26,6 @@
         </v-chip>
       </v-chip-group>
     </v-card-text>
-    <!--<v-card-text class="pt-1 pl-1 pr-1 pb-1">
-      <v-carousel
-        v-model="syrup"
-        :continuous="false"
-        :show-arrows="false"
-        hide-delimiters
-        height="32">
-          <v-carousel-item
-            v-for="(item,index) in product.relatedProduct[0].products"
-            class="text-center d-flex align-center tg-color"
-            :key="index"
-          >
-          <span>
-            {{item.name }}
-          </span>
-          </v-carousel-item>
-        </v-carousel>
-    </v-card-text>-->
     <v-divider class="my-0"></v-divider>
     <v-card-text class="d-flex justify-space-between py-0">
       <p class="d-flex justify-center align-center w-50">
@@ -106,28 +88,3 @@ export default defineComponent ({
 
 })
 </script>
-
-<style>
-.product{
-  display: flex;
-  flex-direction: column;
-  /*border: 1px solid var(--tg-theme-button-color);*/
-  border: 1px solid palevioletred;
-  padding: 15px;
-  width: 170px;
-}
-
-.description {
-  font-size: .8em;
-}
-.add-btn {
-  width: 100%;
-  background-color: #ffb8ce;
-}
-
-.tg-color{
-  background: var(--tg-theme-button-color);
-  color: var(--tg-theme-button-text-color);
-}
-
-</style>

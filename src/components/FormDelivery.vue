@@ -74,11 +74,6 @@
       density="compact"
       required
     />
-    <button
-      @click.prevent="sendOrder"
-    >
-      Проверка связи
-    </button>
   </v-form>
 </template>
 
@@ -160,7 +155,6 @@ export default defineComponent({
         price: totalPrice.value,
         queryId: queryId
       }
-      console.log(JSON.stringify(data))
       fetch('https://33f3-31-47-167-86.eu.ngrok.io/web-data', {
         method: 'POST',
         headers: {

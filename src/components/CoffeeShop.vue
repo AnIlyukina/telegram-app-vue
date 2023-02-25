@@ -71,7 +71,7 @@ export default {
     let selectedPosition = ref(1);
 
     const { menu } = Products.setData({ groups, allProducts });
-  
+
     const products = computed(() => {
       return menu.filter((item) => item.groupId === selectedPosition.value)[0]
         .products;

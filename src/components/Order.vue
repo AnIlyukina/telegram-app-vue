@@ -53,7 +53,7 @@ export default defineComponent({
   emits: ['changeOrder'],
   setup (props, { emit }) {
 
-    const decrementCount = (product, index) => {
+    const decrementCount = (product) => {
       emit('changeOrder', product, 'decrement')
     }
 
