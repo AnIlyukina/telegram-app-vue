@@ -19,6 +19,7 @@ export default class Products {
           // тут надо подумать как написать лучше
           let result = {};
           result = this.setRelatedProducts(product, groups, allProducts);
+          result.groupName = group.name
           data.products.push(result);
         }
       });
@@ -31,7 +32,6 @@ export default class Products {
   }
 
   static setRelatedProducts(product, groups, allProducts) {
-    console.log(product, groups, allProducts);
     let relatedProduct = []
     let groupsForProduct = [];
     product.relatedProduct.forEach(related => {
@@ -55,9 +55,7 @@ export default class Products {
       });
       return data;
     });
-
     
-    console.log(relatedProduct, "groupsForProduct");
     product.relatedProduct = relatedProduct;
     return product;
   }

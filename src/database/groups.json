@@ -19,7 +19,19 @@
   },
   {
     "id": 4,
-    "name": "Выпечка",
+    "name": "Смузи",
+    "parent": 0,
+    "showInCatalog": true
+  },
+  {
+    "id": 5,
+    "name": "Лимонады",
+    "parent": 0,
+    "showInCatalog": true
+  },
+  {
+    "id": 6,
+    "name": "Алкогольные коктейли (18+)",
     "parent": 0,
     "showInCatalog": true
   }

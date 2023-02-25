@@ -1,81 +1,88 @@
 [
   {
     "id": 1,
-    "name": "Капучино",
-    "image": "https://bipbap.ru/wp-content/uploads/2020/01/3-1.png",
+    "name": "Латте",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2021/11/shutterstock_1192991905_1636970755-1280x640.jpeg",
     "groupId": 1,
     "relatedProduct": [2],
     "variants": [
-      { "volume": 200, "price": 100 },
-      { "volume": 250, "price": 150 },
-      { "volume": 300, "price": 200 },
-      { "volume": 350, "price": 250 }
+      { "volume": 250, "price": 250},
+      { "volume": 350, "price": 350}
     ]
   },
   {
     "id": 2,
-    "name": "Латте",
-    "image": "https://bipbap.ru/wp-content/uploads/2020/01/3-1.png",
+    "name": "Раф",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2022/11/shutterstock_2181724809_1669652268-1280x640.jpeg",
     "groupId": 1,
     "relatedProduct": [2],
     "variants": [
-      { "volume": 200, "price": 100 },
-      { "volume": 250, "price": 150 },
-      { "volume": 300, "price": 200 },
-      { "volume": 350, "price": 250 }
+      { "volume": 250, "price": 250},
+      { "volume": 350, "price": 350}
     ]
   },
   {
     "id": 3,
-    "name": "Флэт Уайт",
-    "image": "https://bipbap.ru/wp-content/uploads/2020/01/3-1.png",
+    "name": "Шоколадный холодный кофе",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2022/06/shutterstock_1918895903_1654605078-1280x640.jpeg",
     "groupId": 1,
-    "relatedProduct": [2],
+    "relatedProduct": [],
     "variants": [
-      { "volume": 200, "price": 100 },
-      { "volume": 250, "price": 150 },
-      { "volume": 300, "price": 200 },
-      { "volume": 350, "price": 250 }
+      { "volume": 200, "price": 200},
+      { "volume": 250, "price": 250},
+      { "volume": 300, "price": 300},
+      { "volume": 350, "price": 350}
     ]
   },
   {
     "id": 4,
-    "name": "Раф кофе",
-    "image": "https://bipbap.ru/wp-content/uploads/2020/01/3-1.png",
-    "price": 300,
+    "name": "Холодный кофе с мятой",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2021/06/shutterstock_1414902341_1623332108-1280x640.jpeg",
     "groupId": 1,
     "relatedProduct": [2],
     "variants": [
-      { "volume": 200, "price": 100 },
-      { "volume": 250, "price": 150 },
-      { "volume": 300, "price": 200 },
-      { "volume": 350, "price": 250 }
+      { "volume": 200, "price": 200},
+      { "volume": 250, "price": 250},
+      { "volume": 300, "price": 300},
+      { "volume": 350, "price": 350}
     ]
   },
   {
     "id": 5,
-    "name": "Мокко",
-    "image": "https://bipbap.ru/wp-content/uploads/2020/01/3-1.png",
+    "name": "Моккачино",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2020/05/shutterstock_300683090-1_1589911446-1280x640.jpg",
+    "price": 300,
     "groupId": 1,
     "relatedProduct": [2],
     "variants": [
-      { "volume": 200, "price": 100},
-      { "volume": 250, "price": 150},
-      { "volume": 300, "price": 200},
-      { "volume": 350, "price": 250}
+      { "volume": 200, "price": 200},
+      { "volume": 250, "price": 250},
+      { "volume": 300, "price": 300},
+      { "volume": 350, "price": 350}
     ]
   },
   {
     "id": 6,
-    "name": "Гляссе",
-    "image": "https://bipbap.ru/wp-content/uploads/2020/01/3-1.png",
+    "name": "Кофе с амаретто",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2021/11/shutterstock_1753107884_1637343047-1280x640.jpeg",
     "groupId": 1,
     "relatedProduct": [2],
     "variants": [
-      { "volume": 200, "price": 100},
-      { "volume": 250, "price": 150},
-      { "volume": 300, "price": 200},
-      { "volume": 350, "price": 250}
+      { "volume": 200, "price": 200},
+      { "volume": 250, "price": 250},
+      { "volume": 300, "price": 300},
+      { "volume": 350, "price": 350}
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Ирландский кофе (18+)",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2020/05/shutterstock_674500738-1_1589907000-1280x640.jpg",
+    "groupId": 1,
+    "relatedProduct": [2],
+    "variants": [
+      { "volume": 250, "price": 250},
+      { "volume": 300, "price": 300}
     ]
   },
   {
@@ -116,8 +123,8 @@
   },
   {
     "id": 20,
-    "name": "Ванильный",
-    "image": "https://img.freepik.com/premium-vector/realistic-vanilla-milkshake-in-glass-with-straws-sweet-cold-tasty-summer-beverages-cocktail_341509-4034.jpg",
+    "name": "Классический с мороженым",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2019/03/111_1553694084-e1553694113763-630x315.jpg",
     "groupId": 3,
     "relatedProduct": [],
     "variants": [
@@ -127,24 +134,263 @@
   },
   {
     "id": 21,
+    "name": "С шоколадным соусом",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2019/03/208_1553789294-e1553796236858-630x315.jpg",
+    "groupId": 3,
+    "relatedProduct": [],
+    "variants": [
+      { "volume": 300, "price": 200 },
+      { "volume": 350, "price": 250 }
+    ]
+  },
+  {
+    "id": 22,
+    "name": "С малиной и белым шоколадом",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2019/03/111_1553789094-e1553789132821-630x316.jpg",
+    "groupId": 3,
+    "relatedProduct": [],
+    "variants": [
+      { "volume": 300, "price": 200 },
+      { "volume": 350, "price": 250 }
+    ]
+  },
+  {
+    "id": 23,
+    "name": "С ягодами черники и ежевики",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2019/03/15_1553783640-e1553783666496-630x315.jpg",
+    "groupId": 3,
+    "relatedProduct": [],
+    "variants": [
+      { "volume": 300, "price": 200 },
+      { "volume": 350, "price": 250 }
+    ]
+  },
+  {
+    "id": 30,
+    "name": "С бананом, клубникой и йогуртом",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2019/06/Depositphotos_153656500_xl-2015_1560518491-e1560518587245-630x315.jpg",
+    "groupId": 4,
+    "relatedProduct": [],
+    "variants": [
+      { "volume": 350, "price": 250 }
+    ]
+  },
+  {
+    "id": 31,
+    "name": "С персиком, бананом и малиной",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2019/06/smoothie_1560509176-e1560509204584-630x315.jpg",
+    "groupId": 4,
+    "relatedProduct": [],
+    "variants": [
+      { "volume": 350, "price": 250 }
+    ]
+  },
+  {
+    "id": 32,
+    "name": "С авокадо, бананом и сгущёнкой",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2019/06/smoothie_1560513055-e1560513107946-630x315.jpg",
+    "groupId": 4,
+    "relatedProduct": [],
+    "variants": [
+      { "volume": 350, "price": 250 }
+    ]
+  },
+  {
+    "id": 33,
+    "name": "С грушей, апельсином и зелёным чаем",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2019/06/smoothie-2285722_1280_1560519265-e1560519279234-630x316.jpg",
+    "groupId": 4,
+    "relatedProduct": [],
+    "variants": [
+      { "volume": 350, "price": 250 }
+    ]
+  },
+  {
+    "id": 34,
+    "name": "С ананасом, вишней и бананом",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2019/06/Snimok-ekrana-2019-06-14-v-14.55.31_1560509768-e1560509796329-630x315.jpg",
+    "groupId": 4,
+    "relatedProduct": [],
+    "variants": [
+      { "volume": 350, "price": 250 }
+    ]
+  },
+  {
+    "id": 35,
+    "name": "С кусочками манго и йогуртом",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2019/06/mango-3380630_1280_1560516327-e1560516351542-630x315.jpg",
+    "groupId": 4,
+    "relatedProduct": [],
+    "variants": [
+      { "volume": 350, "price": 250 }
+    ]
+  },
+  {
+    "id": 40,
+    "name": "С лимоном",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2019/04/lemonade-3571083_1920_1555412616-e1555412642131-630x315.jpg",
+    "groupId": 5,
+    "relatedProduct": [],
+    "variants": [
+      { "volume": 250, "price": 250 },
+      { "volume": 350, "price": 350 }
+    ]
+  },
+  {
+    "id": 41,
+    "name": "Апельсиновый",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2019/04/Depositphotos_131425980_xl-2015_1555489192-e1555489256927-630x315.jpg",
+    "groupId": 5,
+    "relatedProduct": [],
+    "variants": [
+      { "volume": 250, "price": 250 },
+      { "volume": 350, "price": 350 }
+    ]
+  },
+  {
+    "id": 42,
     "name": "Клубничный",
-    "image": "data:image/jpeg;base64,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",
-    "groupId": 3,
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2019/04/strawberry-lemonade_1555419274-e1555419396785-630x315.jpg",
+    "groupId": 5,
     "relatedProduct": [],
     "variants": [
-      { "volume": 300, "price": 200 },
-      { "volume": 350, "price": 250 }
+      { "volume": 250, "price": 250 },
+      { "volume": 350, "price": 350 }
     ]
   },
   {
-    "id": 21,
-    "name": "Шоколадный",
-    "image": "https://w7.pngwing.com/pngs/888/923/png-transparent-milkshake-chocolate-milk-cream-cartoon-creative-hand-painted-glass-watercolor-painting-glass-wine-glass.png",
-    "groupId": 3,
+    "id": 43,
+    "name": "Грушевый",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2019/04/pear-lemonade_1555479667-e1555479695853-630x316.jpg",
+    "groupId": 5,
     "relatedProduct": [],
     "variants": [
-      { "volume": 300, "price": 200 },
-      { "volume": 350, "price": 250 }
+      { "volume": 250, "price": 250 },
+      { "volume": 350, "price": 350 }
+    ]
+  },
+  {
+    "id": 44,
+    "name": "Имбирно-мятный",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2019/04/Snimok-ekrana-2019-04-16-v-16.37.06_1555418269-e1555418484155-630x315.png",
+    "groupId": 5,
+    "relatedProduct": [],
+    "variants": [
+      { "volume": 250, "price": 250 },
+      { "volume": 350, "price": 350 }
+    ]
+  },
+  {
+    "id": 45,
+    "name": "Малиновый",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2019/04/raspberry-lemonade_1555484924-e1555484958968-630x316.jpg",
+    "groupId": 5,
+    "relatedProduct": [],
+    "variants": [
+      { "volume": 250, "price": 250 },
+      { "volume": 350, "price": 350 }
+    ]
+  },
+  {
+    "id": 46,
+    "name": "Персиковый",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2019/04/Depositphotos_391634594_xl-2015_1200_1622281400-630x315.jpg",
+    "groupId": 5,
+    "relatedProduct": [],
+    "variants": [
+      { "volume": 250, "price": 250 },
+      { "volume": 350, "price": 350 }
+    ]
+  },
+  {
+    "id": 47,
+    "name": "Огуречный",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2019/04/cucumber-lemonade_1555421989-e1555422046748-630x315.png",
+    "groupId": 5,
+    "relatedProduct": [],
+    "variants": [
+      { "volume": 250, "price": 250 },
+      { "volume": 350, "price": 350 }
+    ]
+  },
+  {
+    "id": 60,
+    "name": "C шампанским и клубничным пюре",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2020/02/shutterstock_1152108089_1581437933-e1581437977673-1280x640.jpg",
+    "groupId": 6,
+    "relatedProduct": [],
+    "variants": [
+      { "volume": 350, "price": 550 }
+    ]
+  },
+  {
+    "id": 61,
+    "name": "C водкой, мандаринами и имбирём",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2020/12/7_1608121512-scaled-e1640612881523-1280x640.jpg",
+    "groupId": 6,
+    "relatedProduct": [],
+    "variants": [
+      { "volume": 350, "price": 550 }
+    ]
+  },
+  {
+    "id": 62,
+    "name": "Апельсиново-клюквенный коктейль с джином",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2022/12/shutterstock_1456954553_1672316718-1280x640.jpeg",
+    "groupId": 6,
+    "relatedProduct": [],
+    "variants": [
+      { "volume": 350, "price": 550 }
+    ]
+  },
+   {
+    "id": 63,
+    "name": "Глинтвейн из красного вина с портвейном",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2022/11/shutterstock_518269072_1667505936-1280x640.jpeg",
+    "groupId": 6,
+    "relatedProduct": [],
+    "variants": [
+      { "volume": 350, "price": 550 }
+    ]
+  },
+  {
+    "id": 64,
+    "name": "«Белый русский»",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2021/02/Depositphotos_132541616_xl-2015_1612446339-1280x640.jpg",
+    "groupId": 6,
+    "relatedProduct": [],
+    "variants": [
+      { "volume": 350, "price": 550 }
+    ]
+  },
+  {
+    "id": 65,
+    "name": "«Лонг-Айленд»",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2021/02/shutterstock_452909893_1612448439-1280x640.jpg",
+    "groupId": 6,
+    "relatedProduct": [],
+    "variants": [
+      { "volume": 350, "price": 550 }
+    ]
+  },
+   {
+    "id": 66,
+    "name": "C ромом и вишнёвым соком",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2020/12/Depositphotos_32753079_xl-2015_1608709210-1280x640.jpg",
+    "groupId": 6,
+    "relatedProduct": [],
+    "variants": [
+      { "volume": 350, "price": 550 }
+    ]
+  },
+  {
+    "id": 67,
+    "name": "Грушевый коктейль с шампанским",
+    "image": "https://cdn.lifehacker.ru/wp-content/uploads/2020/11/Depositphotos_146180863_xl-2015-1_1604316261-1280x640.jpg",
+    "groupId": 6,
+    "relatedProduct": [],
+    "variants": [
+      { "volume": 350, "price": 550 }
     ]
   }
 ]

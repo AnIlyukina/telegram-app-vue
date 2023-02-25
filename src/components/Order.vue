@@ -1,29 +1,37 @@
 <template>
-  <div
-    v-for="(product, index) in order"
-    :key="product.id"
-    class="text-start mb-3 d-flex justify-space-between"
-  >
-    <div>
-      {{ product.name }} <sup>{{ product.volume }}мл.</sup>
-      <v-btn
-        size="x-small"
-        icon="mdi-minus"
-        class="ml-2 order-button"
-        @click="decrementCount(product, index)"
-      />
-      {{ product.count }}
-      <v-btn
-        size="x-small"
-        icon="mdi-plus" 
-        class="mr-2 order-button"
-        @click="incrementCount(product)"
-      />
-      - {{ product.count * product.price }}<small>₽</small>
-    </div>
-  </div>
+  <v-table>
+    <tbody>
+      <tr
+        v-for="product in order"
+        :key="product.id"
+      >
+        <td class="px-0 w-50">
+          {{ product.name }} <sup>{{ product.volume }}мл.</sup> 
+          <!--<small>({{ product.groupName }})</small>-->
+        </td>
+        <td class="px-0 text-end">
+           <v-btn
+            size="x-small"
+            icon="mdi-minus"
+            class="ml-2 order-button"
+            @click="decrementCount(product, index)"
+          />
+            {{ product.count }}
+            <v-btn
+              size="x-small"
+              icon="mdi-plus" 
+              class="mr-2 order-button"
+              @click="incrementCount(product)"
+            />
+        </td>
+        <td class="px-0 text-end">
+          {{ product.count * product.price }}<small>₽</small>
+        </td>
+      </tr>
+    </tbody>
+  </v-table>
   <v-divider></v-divider>
-  <p class="mt-1 text-end">Итого: {{ totalPrice }} ₽.</p>
+  <p class="mt-1 text-end">{{ totalPrice }} ₽.</p>
 </template>
 
 <script>

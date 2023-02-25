@@ -1,7 +1,11 @@
 <template>
-  <button class="button">
+  <v-btn
+    rounded="pill"
+    :color="'var(--tg-theme-button-color)'"
+    variant="tonal"
+  >
     <slot></slot>
-  </button>
+  </v-btn>
 </template>
 
 <script>
@@ -11,14 +15,3 @@ export default defineComponent({
   name: 'TgButton'
 });
 </script>
-
-<style>
-.button {
-  padding: 5px 10px;
-  background: var(--tg-theme-button-color);
-  color: var(--tg-theme-button-text-color);
-  border: none;
-  outline: none;
-  cursor: pointer;
-}
-</style>

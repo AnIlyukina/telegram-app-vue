@@ -2,10 +2,10 @@
   <v-card>
     <v-img
       height="100"
-      contain
+      cover
       :src="product.image"
     ></v-img>
-    <v-card-title class="py-0 text-center">{{ product.name }}</v-card-title>
+    <v-card-text class="py-0 text-center">{{ product.name }}</v-card-text>
     <v-divider class="my-0"></v-divider>
     <v-card-text
       class="pt-1 pl-1 pr-1 pb-1"
@@ -14,7 +14,7 @@
         v-model="selectedVolume"
         center-active
         column
-        class="justify-center"
+        class="justify-center py-0"
       >
         <v-chip
           v-for="(variant, index) in product.variants"
@@ -26,8 +26,8 @@
         </v-chip>
       </v-chip-group>
     </v-card-text>
-    <v-card-text class="pt-1 pl-1 pr-1 pb-1">
-      <!--<v-carousel
+    <!--<v-card-text class="pt-1 pl-1 pr-1 pb-1">
+      <v-carousel
         v-model="syrup"
         :continuous="false"
         :show-arrows="false"
@@ -42,10 +42,10 @@
             {{item.name }}
           </span>
           </v-carousel-item>
-        </v-carousel>-->
-    </v-card-text>
-
-    <v-card-text class="d-flex justify-space-between pt-1">
+        </v-carousel>
+    </v-card-text>-->
+    <v-divider class="my-0"></v-divider>
+    <v-card-text class="d-flex justify-space-between py-0">
       <p class="d-flex justify-center align-center w-50">
         Цена: {{ price }}&nbsp;₽.
       </p>
@@ -83,6 +83,7 @@ export default defineComponent ({
       let selected = {
         id: product.value.id,
         name: product.value.name,
+        groupName: product.value.groupName,
         volume: product.value.variants[selectedVolume.value].volume,
         price: price.value
       }

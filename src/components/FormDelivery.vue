@@ -3,7 +3,7 @@
     <div class="mb-3 mt-2">
       <v-text-field
         v-model="stateForm.city"
-        :error-messages="v$.city.$errors.map(e => e.$message)"
+        :error-messages="stateError.city"
         :disabled="!order.length"
         :color="'var(--tg-theme-button-color)'"
         type="input"
@@ -17,7 +17,7 @@
     <div class="mb-3">
       <v-text-field
         v-model="stateForm.address"
-        :error-messages="v$.address.$errors.map(e => e.$message)"
+        :error-messages="stateError.address"
         :disabled="!order.length"
         :color="'var(--tg-theme-button-color)'"
         clearable
@@ -34,7 +34,7 @@
         cols="6">
         <v-text-field
           v-model="stateForm.intercom"
-          :error-messages="v$.intercom.$errors.map(e => e.$message)"
+          :error-messages="stateError.intercom"
           :disabled="!order.length"
            :color="'var(--tg-theme-button-color)'"
           clearable
@@ -49,7 +49,7 @@
         cols="6">
         <v-text-field
           v-model="stateForm.floor"
-          :error-messages="v$.floor.$errors.map(e => e.$message)"
+          :error-messages="stateError.floor"
           :disabled="!order.length"
           :color="'var(--tg-theme-button-color)'"
           clearable
@@ -63,7 +63,7 @@
     </v-row>
     <v-select
       v-model="stateForm.paymentSelected"
-      :error-messages="v$.paymentSelected.$errors.map(e => e.$message)"
+      :error-messages="stateError.paymentSelected"
       :items="paymentType"
       :disabled="!order.length"
       :color="'var(--tg-theme-button-color)'"
@@ -84,8 +84,6 @@
 
 <script>
 import {defineComponent, onMounted, reactive, toRefs, onUnmounted} from "vue";
-import { helpers, required } from "@vuelidate/validators";
-import { useVuelidate } from "@vuelidate/core";
 import { useTelegram } from '@/hooks/useTelegram'
 export default defineComponent({
   name: "FormDelivery",
@@ -111,27 +109,25 @@ export default defineComponent({
       floor: '',
       paymentSelected: ''
     }
+    const initialStateError = {
+      city: [],
+      address: [],
+      intercom: [],
+      floor: [],
+      paymentSelected: []
+    }
 
+    let stateError = reactive({
+      ...initialStateError
+    })
     const stateForm = reactive({
       ...initialStateFrom,
     })
-
-    const rules = {
-      city: {
-        required: helpers.withMessage('Обязательное поле', required)
-      },
-      address: { required: helpers.withMessage('Обязательное поле', required) },
-      intercom: { required: helpers.withMessage('Обязательное поле', required) },
-      floor: { required: helpers.withMessage('Обязательное поле', required) },
-      paymentSelected: { required: helpers.withMessage('Обязательное поле', required) },
-    }
-
-    const v$ = useVuelidate(rules, stateForm)
+  
     const { tg, queryId }  = useTelegram()
     const { 
-      // order,
+      order,
       totalPrice } = toRefs(props)
-    tg.onEvent('mainButtonClicked', sendOrder)
     onMounted(() => {
       tg.onEvent('mainButtonClicked', sendOrder)
       tg.MainButton.setParams({
@@ -139,22 +135,33 @@ export default defineComponent({
         is_visible: true
       })
     })
-   function sendOrder() {
-     console.log('dsd')
-      if (this.v$.$invalid) {
+
+    const checkValidForm = () => {
+      let errors = false
+      for (let key in stateError) {
+        stateError[key] = []
+        if (!stateForm[key]) {
+          stateError[key].push('Необходимо заполнить поле')
+          errors = true
+        }
+      }
+      return errors
+    }
+    function sendOrder() {
+
+      const errors = checkValidForm()
+      if (errors) {
         return
       }
-      // const result = await this.v$.$validate()
-      // if (!result) {
-      //   return
-      // }
+
       const data = {
         userInfo: stateForm,
+        order: order.value,
         price: totalPrice.value,
         queryId: queryId
       }
-      console.log(JSON.stringify(data), queryId)
-      fetch('https://7393-185-37-59-81.eu.ngrok.io/web-data', {
+      console.log(JSON.stringify(data))
+      fetch('https://33f3-31-47-167-86.eu.ngrok.io/web-data', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -164,15 +171,14 @@ export default defineComponent({
     }
 
     onUnmounted(() => {
-      console.log('onUnmounted')
       tg.offEvent('mainButtonClicked', sendOrder)
       tg.MainButton.hide()
     })
 
     return {
       stateForm,
-      v$,
-      sendOrder
+      sendOrder,
+      stateError
     }
   }
 })

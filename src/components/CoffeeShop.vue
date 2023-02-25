@@ -22,7 +22,7 @@
             :total-price="totalPrice"
             @changeOrder="changeOrder"
           />
-          <h4 class="mb-4">Куда везем? sdcdscdsc</h4>
+          <h4 class="mb-4">Куда везем?</h4>
         </div>
         <div v-else class="text-center mt-4">
           Корзина пуста, выбери товар и возврашайся
@@ -71,7 +71,7 @@ export default {
     let selectedPosition = ref(1);
 
     const { menu } = Products.setData({ groups, allProducts });
-    console.log(menu, "menu");
+  
     const products = computed(() => {
       return menu.filter((item) => item.groupId === selectedPosition.value)[0]
         .products;
@@ -89,6 +89,7 @@ export default {
         acc[key] = acc[key] || {
           id: cur.id,
           name: cur.name,
+          groupName: cur.groupName,
           volume: cur.volume,
           price: cur.price,
           count: 0,
